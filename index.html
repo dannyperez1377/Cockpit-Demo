@@ -9,95 +9,89 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0a0b;--s1:#111113;--s2:#18181b;--s3:#222226;--s4:#2a2a2e;
-  --b1:#2a2a30;--b2:#35353d;--b3:#404048;
-  --t0:#fff;--t1:#e8e8ec;--t2:#9898a8;--t3:#55555f;--t4:#35353d;
-  --gold:#c8a96e;--gold2:#e2c98a;--gold3:rgba(200,169,110,.12);
-  --red:#d95f5f;--ra:rgba(217,95,95,.1);--rb:rgba(217,95,95,.06);
-  --amb:#c4861e;--aa:rgba(196,134,30,.1);
-  --grn:#4d9e72;--ga:rgba(77,158,114,.1);
-  --blu:#5b8dd4;--ba:rgba(91,141,212,.1);
+  --bg:#f4f5f7;--s1:#ffffff;--s2:#f0f1f4;--s3:#e8eaed;--s4:#dde0e6;
+  --b1:#d0d4dc;--b2:#b8bcc8;--b3:#9ca0b0;
+  --t0:#0f1117;--t1:#1a1d27;--t2:#4a5068;--t3:#7a80a0;
+  --gold:#a07830;--g3:rgba(160,120,48,.08);
+  --red:#c0303a;--ra:rgba(192,48,58,.08);
+  --amb:#a06010;--aa:rgba(160,96,16,.08);
+  --grn:#1e7a4a;--ga:rgba(30,122,74,.08);
+  --blu:#2460b0;--ba:rgba(36,96,176,.08);
   --f:'Outfit',sans-serif;--m:'IBM Plex Mono',monospace;
 }
 html,body{height:100%;background:var(--bg);color:var(--t1);font-family:var(--f);font-weight:300;overflow:hidden}
 body{display:flex;flex-direction:column}
-
-/* ── TOPBAR ── */
 #hd{height:54px;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 26px;gap:0;flex-shrink:0}
-.hd-logo{height:20px;opacity:.9}
+.hd-logo{height:20px;opacity:.9;background:#1a1d27;border-radius:4px;padding:3px 7px}
 .hd-sep{width:1px;height:20px;background:var(--b1);margin:0 20px}
 .hd-title{font-size:12px;font-weight:400;color:var(--t2);letter-spacing:.3px}
 .hd-r{margin-left:auto;display:flex;align-items:center;gap:12px}
 .ts{font-size:9px;color:var(--t3);font-family:var(--m)}
-.live-btn{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:500;color:var(--grn);font-family:var(--m);letter-spacing:.5px;border:1px solid rgba(77,158,114,.2);padding:3px 9px;border-radius:2px;cursor:pointer;transition:background .15s;user-select:none}
+.live-btn{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:500;color:var(--grn);font-family:var(--m);letter-spacing:.5px;border:1px solid rgba(77,158,114,.2);padding:3px 9px;border-radius:2px;cursor:pointer;user-select:none;transition:background .15s}
 .live-btn:hover{background:rgba(77,158,114,.06)}
 .live-dot{width:5px;height:5px;border-radius:50%;background:var(--grn);animation:pu 2.5s ease infinite;flex-shrink:0}
-.live-dot.loading{animation:none;background:var(--gold);opacity:.7}
+.live-dot.spin{animation:none;background:var(--gold);opacity:.7}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.3}}
 .rbtn{width:26px;height:26px;background:none;border:1px solid var(--b1);border-radius:2px;color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
 .rbtn:hover{color:var(--t1);border-color:var(--b2)}
 .rbtn.spin{animation:sp .7s linear infinite;color:var(--gold);border-color:rgba(200,169,110,.3)}
 @keyframes sp{to{transform:rotate(360deg)}}
 .hd-client{font-size:9px;color:var(--t3);font-family:var(--m)}
-.rflash{position:fixed;inset:0;background:rgba(200,169,110,.035);pointer-events:none;z-index:200;animation:rf .5s ease forwards}
+.rflash{position:fixed;inset:0;background:rgba(200,169,110,.04);pointer-events:none;z-index:200;animation:rf .5s ease forwards}
 @keyframes rf{0%{opacity:1}100%{opacity:0}}
 
-/* ── TABS ── */
 #nav{height:38px;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:stretch;padding:0 22px;flex-shrink:0}
 .nb{height:38px;padding:0 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--f);font-size:11px;font-weight:400;color:var(--t3);letter-spacing:.35px;white-space:nowrap;display:flex;align-items:center;gap:7px;transition:color .15s,border-color .15s}
-.nb:hover{color:var(--t2)}
-.nb.on{color:var(--t0);border-bottom-color:var(--gold)}
+.nb:hover{color:var(--t2)}.nb.on{color:var(--t0);border-bottom-color:var(--gold)}
 .nb-k{font-family:var(--m);font-size:8px;color:var(--gold);opacity:.5;letter-spacing:.4px}
-.nb-badge{font-size:8px;background:var(--red);color:#fff;border-radius:8px;padding:1px 5px;font-family:var(--m);font-weight:500;animation:bp .3s ease}
-@keyframes bp{from{transform:scale(0)}to{transform:scale(1)}}
+.nb-badge{font-size:8px;background:var(--red);color:#fff;border-radius:8px;padding:1px 5px;font-family:var(--m);font-weight:500}
 
-/* ── CANVAS ── */
 #cv{flex:1;min-height:0;overflow-y:auto;background:var(--bg);padding:16px 22px;display:flex;flex-direction:column;gap:11px}
 #cv::-webkit-scrollbar{width:3px}
 #cv::-webkit-scrollbar-thumb{background:var(--b2)}
 
-/* ── FILTERS ── */
+/* layout */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+
+/* filter bar */
 .fb{background:var(--s1);border:1px solid var(--b1);border-radius:2px;padding:8px 14px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .fl{font-size:8px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:1px;font-family:var(--m)}
 .fs{font-size:11px;border:1px solid var(--b1);border-radius:2px;padding:4px 9px;background:var(--s2);color:var(--t2);cursor:pointer;outline:none;font-family:var(--f);font-weight:300;transition:all .15s}
 .fs:hover,.fs:focus{border-color:var(--b2);color:var(--t1)}
 .fc{margin-left:auto;font-size:9px;color:var(--t3);font-family:var(--m)}
 
-/* ── GRIDS ── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-
-/* ── METRIC CARDS ── */
+/* metric cards */
 .mc{background:var(--s1);border:1px solid var(--b1);border-radius:2px;padding:16px 18px;position:relative;overflow:hidden;transition:border-color .18s,background .18s}
-.mc.cp{cursor:pointer}
-.mc.cp:hover{background:rgba(200,169,110,.02);border-color:var(--b2)}
-.mc.on{border-color:var(--gold)!important;background:var(--gold3)}
-.mc-v{font-size:28px;font-weight:200;line-height:1;font-family:var(--m);letter-spacing:-1px}
-.mc-v.fl{animation:nf .4s ease}
+.mc.cp{cursor:pointer}.mc.cp:hover{background:rgba(200,169,110,.02);border-color:var(--b2)}
+.mc.on{border-color:var(--gold)!important;background:var(--g3)}
+.mc-v{font-size:28px;font-weight:200;line-height:1;font-family:var(--m);letter-spacing:-1px;transition:all .4s}
+.mc-v.ani{animation:nf .4s ease}
 @keyframes nf{0%{opacity:.2;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
 .mc-v.r{color:var(--red)}.mc-v.a{color:var(--amb)}.mc-v.g{color:var(--grn)}.mc-v.b{color:var(--blu)}.mc-v.x{color:var(--t3)}
 .mc-l{font-size:9px;font-weight:500;color:var(--t2);margin-top:7px;letter-spacing:.5px;text-transform:uppercase}
 .mc-s{font-size:9px;color:var(--t3);margin-top:2px;font-family:var(--m)}
-.mc-hint{font-size:9px;color:var(--t3);margin-top:8px;padding-top:8px;border-top:1px solid var(--b1);font-family:var(--m);line-height:1.5;display:none}
+.mc-hint{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--b1);font-size:10px;color:var(--t2);line-height:1.6;font-weight:300}
 .mc.on .mc-hint{display:block}
+.mc-breakdown{display:none;margin-top:8px;display:none}
+.mc.on .mc-breakdown{display:block}
 
-/* ── ALERTS ── */
+/* alerts */
 .al{border-radius:2px;padding:10px 14px;font-size:11px;font-weight:300;display:flex;align-items:flex-start;gap:10px;border-left:1px solid;line-height:1.5}
 .al-bar{width:1px;min-height:14px;flex-shrink:0;margin-top:3px;border-radius:1px}
 .al.am{background:var(--aa);color:rgba(196,134,30,.9);border-color:var(--amb)}
 .al.re{background:var(--ra);color:rgba(217,95,95,.9);border-color:var(--red)}
 .al.gr{background:var(--ga);color:rgba(77,158,114,.9);border-color:var(--grn)}
-.al a{color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;opacity:.8}
-.al a:hover{opacity:1}
+.al a{color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;opacity:.8}.al a:hover{opacity:1}
 
-/* ── CHART CARDS ── */
+/* chart card */
 .cc{background:var(--s1);border:1px solid var(--b1);border-radius:2px;padding:16px 18px}
 .ct{font-size:8px;font-weight:500;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:14px;font-family:var(--m)}
 .cb{position:relative}
 
-/* ── HBARS ── */
+/* horiz bars */
 .hr-w{display:flex;flex-direction:column;gap:8px}
 .hrow{display:flex;align-items:center;gap:10px}
 .hl{font-size:9px;color:var(--t2);width:82px;text-align:right;flex-shrink:0}
@@ -106,7 +100,7 @@ body{display:flex;flex-direction:column}
 .hp{font-size:9px;font-weight:500;width:34px;text-align:right;flex-shrink:0;font-family:var(--m)}
 .tl{position:absolute;top:-5px;bottom:-5px;width:1px;background:var(--red);opacity:.22}
 
-/* ── TABLE ── */
+/* table */
 .tw{background:var(--s1);border:1px solid var(--b1);border-radius:2px;overflow:hidden}
 table{width:100%;border-collapse:collapse;font-size:11px}
 thead tr{background:var(--s2)}
@@ -117,74 +111,59 @@ tbody tr:hover td{background:var(--s2)}
 tbody tr.on td{background:rgba(200,169,110,.04)}
 tbody tr:last-child td{border-bottom:none}
 
-/* ── BADGES ── */
+/* badges */
 .bg{display:inline-block;padding:2px 7px;border-radius:1px;font-size:8px;font-weight:500;letter-spacing:.4px;text-transform:uppercase;font-family:var(--m)}
-.ov{background:var(--ra);color:var(--red)}
-.cr{background:var(--aa);color:var(--amb)}
-.hr{background:var(--aa);color:var(--amb)}
-.wa{background:var(--ba);color:var(--blu)}
-.ok{background:var(--ga);color:var(--grn)}
+.ov{background:var(--ra);color:var(--red)}.cr{background:var(--aa);color:var(--amb)}
+.hr{background:var(--aa);color:var(--amb)}.wa{background:var(--ba);color:var(--blu)}.ok{background:var(--ga);color:var(--grn)}
 
-/* ── PROGRESS ── */
+/* progress */
 .pb{background:var(--s3);border-radius:1px;height:2px;overflow:hidden;flex:1}
 .pb-f{height:100%;border-radius:1px}
 .vp{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:500;font-family:var(--m);padding:2px 6px;border-radius:1px}
 .vn{background:var(--ra);color:var(--red)}.vps{background:var(--ga);color:var(--grn)}
 
-/* ── DRILL PANEL ── */
+/* clickable row panels */
+.row-detail{background:var(--s2);border-left:2px solid var(--gold);padding:14px 16px;animation:si .18s ease;font-size:11px;color:var(--t2);line-height:1.7;font-weight:300}
+@keyframes si{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+/* drill panel */
 .drill{background:var(--s1);border:1px solid var(--b1);border-radius:2px;overflow:hidden;animation:si .18s ease}
-@keyframes si{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .dr-hd{background:var(--s2);border-bottom:1px solid var(--b1);padding:11px 16px;display:flex;justify-content:space-between;align-items:flex-start}
 .dr-ttl{font-size:12px;font-weight:400;color:var(--t0)}
 .dr-sub{font-size:9px;color:var(--t3);font-family:var(--m);margin-top:3px}
 .dr-close{background:none;border:1px solid var(--b1);color:var(--t3);width:22px;height:22px;border-radius:2px;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .dr-close:hover{color:var(--t1);border-color:var(--b2)}
 .dr-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
-.dr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dr-4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dr-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .dr-cell{background:var(--s2);border:1px solid var(--b1);border-radius:2px;padding:10px 13px}
 .dr-key{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;font-family:var(--m)}
 .dr-val{font-size:14px;font-weight:300;color:var(--t0);font-family:var(--m)}
+.dr-val.sm{font-size:11px;font-weight:400;color:var(--t1)}
 .dr-meta{font-size:11px;color:var(--t2);line-height:1.7;font-weight:300}
 .dr-sect{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;font-family:var(--m)}
 .dr-pout{background:var(--s3);border-radius:1px;height:5px;overflow:hidden}
 .dr-pin{height:100%;border-radius:1px;transition:width .7s cubic-bezier(.4,0,.2,1)}
-.dr-timeline{display:flex;flex-direction:column;gap:8px}
-.dr-tl-row{display:flex;align-items:center;gap:10px;font-size:10px;color:var(--t2)}
-.dr-tl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.dr-tl-line{width:1px;height:14px;background:var(--b2);margin-left:3px}
-.dr-actions{display:flex;flex-direction:column;gap:7px}
-.dr-action{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;background:var(--s2);border:1px solid var(--b1);border-radius:2px;cursor:pointer;transition:border-color .15s}
-.dr-action:hover{border-color:var(--b2)}
-.dr-action.done{opacity:.45}
-.dr-action.done .dr-act-text{text-decoration:line-through;color:var(--t3)}
-.dr-act-cb{width:14px;height:14px;border:1px solid var(--b1);border-radius:2px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:var(--m);transition:all .15s}
-.dr-act-cb.done{background:var(--ga);border-color:var(--grn);color:var(--grn)}
-.dr-act-label{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;font-family:var(--m);margin-bottom:2px}
-.dr-act-text{font-size:11px;color:var(--t2);font-weight:300;line-height:1.4}
-.dr-kpirow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.dr-kpi-box{background:var(--s2);border:1px solid var(--b1);border-radius:2px;padding:10px 13px}
-.hist-row{display:flex;gap:3px;align-items:flex-end;height:40px}
-.hist-bar{flex:1;border-radius:1px 1px 0 0;min-width:0}
+.vel-row{display:flex;align-items:center;gap:10px;font-size:10px;color:var(--t3);flex-wrap:wrap}
+.tag{display:inline-block;padding:2px 8px;border-radius:1px;font-size:9px;font-family:var(--m);font-weight:500}
 
-/* ── DEPT CARD (clickable in capacity) ── */
-.dept-card{background:var(--s1);border:1px solid var(--b1);border-radius:2px;padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+/* dept / staff cards */
+.dept-card{background:var(--s1);border:1px solid var(--b1);border-radius:2px;padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
 .dept-card:hover{background:var(--s2);border-color:var(--b2)}
-.dept-card.on{border-color:var(--gold);background:var(--gold3)}
+.dept-card.on{border-color:var(--gold);background:var(--g3)}
 .dept-card-name{font-size:12px;font-weight:500;color:var(--t1);margin-bottom:6px}
 .dept-card-util{font-size:24px;font-weight:200;font-family:var(--m);line-height:1}
 .dept-card-sub{font-size:9px;color:var(--t3);font-family:var(--m);margin-top:4px}
 .dept-card-bar{height:2px;background:var(--s3);border-radius:1px;margin-top:10px;overflow:hidden}
-.dept-card-fill{height:100%;border-radius:1px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.dept-detail{background:var(--s2);border:1px solid var(--b1);border-radius:2px;padding:14px 16px;animation:si .18s ease}
+.dept-card-fill{height:100%;border-radius:1px;transition:width .6s}
+.xpand{background:var(--s2);border:1px solid var(--b1);border-left:2px solid var(--gold);border-radius:2px;padding:14px 16px;animation:si .18s ease}
 
-/* ── STAFF CARD (clickable) ── */
 .staff-row{display:flex;align-items:center;gap:12px;padding:10px 13px;cursor:pointer;border-bottom:1px solid var(--b1);transition:background .1s}
-.staff-row:hover{background:var(--s2)}
+.staff-row:hover{background:var(--s2)}.staff-row.on{background:rgba(200,169,110,.04)}
 .staff-row:last-child{border-bottom:none}
-.staff-row.on{background:rgba(200,169,110,.04)}
-.staff-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;font-family:var(--m)}
+.staff-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;font-family:var(--m)}
 
-/* ── SIGNAL PAGE ── */
+/* signals */
 .sig-hd{background:var(--s1);border:1px solid var(--b1);border-left:2px solid var(--amb);border-radius:2px;padding:13px 18px}
 .sig-title{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.8px;color:var(--amb);font-family:var(--m);margin-bottom:4px}
 .sig-body{font-size:11px;color:rgba(196,134,30,.8);font-weight:300;line-height:1.5}
@@ -192,34 +171,34 @@ tbody tr:last-child td{border-bottom:none}
 .sig-col-hd{padding:10px 14px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:8px}
 .sig-col-t{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;font-family:var(--m)}
 .sig-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.sig-item{padding:10px 14px;border-bottom:1px solid var(--b1);font-size:10px;color:var(--t2);font-weight:300;cursor:pointer;transition:background .1s;line-height:1.5}
-.sig-item:hover{background:var(--s2)}
-.sig-item:last-child{border-bottom:none}
-.sig-item.on{background:rgba(200,169,110,.04);border-left:1px solid var(--gold)}
-.sig-item-title{font-weight:400;color:var(--t1);margin-bottom:2px}
-.sig-item-detail{display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--b1);font-size:10px;color:var(--t2);line-height:1.6}
-.sig-item.on .sig-item-detail{display:block}
+.sig-item{padding:11px 14px;border-bottom:1px solid var(--b1);font-size:10px;color:var(--t2);font-weight:300;cursor:pointer;transition:background .1s;line-height:1.5}
+.sig-item:hover{background:var(--s2)}.sig-item:last-child{border-bottom:none}
+.sig-item.on{background:rgba(200,169,110,.04)}
+.sig-item-title{font-weight:400;color:var(--t1);margin-bottom:3px}
+.sig-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--b1);font-size:10px;color:var(--t2);line-height:1.7}
+.sig-item.on .sig-detail{display:block}
+.sig-actions{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.sig-action{padding:6px 10px;background:var(--s3);border-radius:2px;font-size:9px;font-family:var(--m);color:var(--t2);display:flex;align-items:center;gap:6px}
 .sig-trigger{background:var(--s2);border-radius:2px;padding:10px 14px;font-size:9px;color:var(--t3);font-family:var(--m);line-height:1.7}
 .chk-action{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-bottom:1px solid var(--b1);cursor:pointer;transition:background .1s}
-.chk-action:hover{background:var(--s2)}
-.chk-action:last-child{border-bottom:none}
+.chk-action:hover{background:var(--s2)}.chk-action:last-child{border-bottom:none}
 .chk-box{width:14px;height:14px;border:1px solid var(--b1);border-radius:2px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:var(--m);transition:all .15s}
 .chk-box.done{background:var(--ga);border-color:var(--grn);color:var(--grn)}
 .chk-text{font-size:11px;color:var(--t2);font-weight:300;line-height:1.5;transition:all .15s}
 .chk-text.done{text-decoration:line-through;color:var(--t3)}
 
-/* ── FOOTER ── */
+/* OTD bar row clickable */
+.otd-bar-row{display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer;border-radius:2px;transition:background .1s}
+.otd-bar-row:hover{background:rgba(255,255,255,.02)}
+.otd-bar-row.on .otd-expand{display:block}
+.otd-expand{display:none;margin-top:6px;padding:8px 10px;background:var(--s2);border-radius:2px;font-size:9px;color:var(--t2);line-height:1.6;font-family:var(--m)}
+
 #ft{height:26px;background:var(--s1);border-top:1px solid var(--b1);display:flex;align-items:center;padding:0 26px;flex-shrink:0}
 .ft{font-size:8px;color:var(--t3);letter-spacing:.3px;font-family:var(--m)}
-.fts{color:var(--b2);margin:0 9px}
-.ftr{margin-left:auto}
-.lgnd{display:flex;gap:12px;margin-top:8px}
-.li{display:flex;align-items:center;gap:5px;font-size:8px;color:var(--t3);font-family:var(--m)}
-.ld{width:12px;height:2px;border-radius:1px}
+.fts{color:var(--b2);margin:0 9px}.ftr{margin-left:auto}
 </style>
 </head>
 <body>
-
 <div id="hd">
   <img class="hd-logo" src="data:image/png;base64,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" alt="Arkad Partners">
   <div class="hd-sep"></div>
@@ -227,322 +206,451 @@ tbody tr:last-child td{border-bottom:none}
   <div class="hd-r">
     <span class="ts" id="ts">Updated just now</span>
     <div class="live-btn" onclick="doRefresh()"><div class="live-dot" id="ldot"></div>LIVE</div>
-    <button class="rbtn" id="rbtn" onclick="doRefresh()">↻</button>
-    <span class="hd-client">David van Riesen &nbsp;·&nbsp; Arkad Partners</span>
+    <button class="rbtn" id="rbtn" onclick="doRefresh()">&#8635;</button>
+    <span class="hd-client">David van Riesen &nbsp;&middot;&nbsp; Arkad Partners</span>
   </div>
 </div>
-
 <div id="nav">
-  <button class="nb on" id="t0" onclick="go(0)">Operations <span class="nb-k">4·6·8</span></button>
-  <button class="nb" id="t1" onclick="go(1)">Capacity <span class="nb-k">1·2·5</span></button>
-  <button class="nb" id="t2" onclick="go(2)">Work Orders <span class="nb-k">3·4·6</span></button>
-  <button class="nb" id="t3" onclick="go(3)">Resources <span class="nb-k">7·8</span></button>
+  <button class="nb on" id="t0" onclick="go(0)">Operations <span class="nb-k">4&middot;6&middot;8</span></button>
+  <button class="nb" id="t1" onclick="go(1)">Capacity <span class="nb-k">1&middot;2&middot;5</span></button>
+  <button class="nb" id="t2" onclick="go(2)">Work Orders <span class="nb-k">3&middot;4&middot;6</span></button>
+  <button class="nb" id="t3" onclick="go(3)">Resources <span class="nb-k">7&middot;8</span></button>
   <button class="nb" id="t4" onclick="go(4)">Signals <span class="nb-k">8</span><span class="nb-badge" id="sbdg">5</span></button>
 </div>
-
 <div id="cv"></div>
-
 <div id="ft">
-  <span class="ft">Aigency Global</span><span class="fts">·</span>
-  <span class="ft">aigency.global</span><span class="fts">·</span>
+  <span class="ft">Aigency Global</span><span class="fts">&middot;</span>
+  <span class="ft">aigency.global</span><span class="fts">&middot;</span>
   <span class="ft">Sample data &mdash; demonstration only</span>
   <span class="ft ftr">May 2025</span>
 </div>
-
 <script>
-/* ━━ DATA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const BASE=[
-  {wo:"WO-2026-0007",c:"Van der Berg",   r:"Overdue",  p:"High",  d:"12 May",dy:-21,pc:45,v:-32,dp:"Welding",
-   info:"Steel tank fabrication for industrial refrigeration unit. Original delivery: 12 May. Current status: 45% complete, accelerating failure — velocity at −32% vs expected.",
+  {wo:"WO-2026-0007",c:"Van der Berg",r:"Overdue",p:"High",d:"12 May",dy:-21,pc:45,v:-32,dp:"Welding",
+   status:"ERP data last updated 08:14 this morning. 3 of 4 scheduled weld checkpoints missed.",
+   info:"Steel tank fabrication for industrial refrigeration unit. Original delivery: 12 May. 21 days overdue. At current velocity, projected completion is 31 May — a 19-day slip.",
+   root:"Material delivery delayed 4 days due to supplier logistics issue (Rijnmond Steel). 2 of 3 assigned welders were temporarily reallocated to WO-2026-0018 last week, compounding the delay. Customer Van der Berg has been informed once and expects an update within 48 hours.",
    history:[20,24,28,31,33,36,38,40,42,45],
-   root:"Material delivery delayed 4 days due to supplier issue. 2 of 3 assigned welders reassigned to WO-2026-0018 last week. Customer Van der Berg contacted — expects 48h update.",
-   actions:["Reassign both WLD-01 welders back to this job","Escalate supplier delivery for remaining materials","Call Van der Berg: provide new estimated delivery date","Consider weekend overtime to close the gap"]},
-  {wo:"WO-2026-0018",c:"Dijkstra Tech",  r:"Overdue",  p:"High",  d:"17 May",dy:-16,pc:62,v:-18,dp:"Welding",
-   info:"Industrial frame structure for conveyor system. 16 days overdue. Engineering sign-off on modified spec still pending from their side.",
+   actions:["Reassign both WLD-01 welders back to this job immediately","Resolve remaining material delivery with Rijnmond Steel — confirm ETA today","Call Van der Berg: provide revised delivery date of 31 May","Authorise weekend overtime to recover 2 days","Escalate to management if delivery cannot be committed by 26 May"],
+   customer_risk:"HIGH — Van der Berg is a repeat customer with 3 active orders. Delay jeopardises relationship and potential follow-on contract worth est. €280k.",
+   hrs_remaining:88, hrs_planned:160, wc:"WC-WLD-01"},
+  {wo:"WO-2026-0018",c:"Dijkstra Tech",r:"Overdue",p:"High",d:"17 May",dy:-16,pc:62,v:-18,dp:"Welding",
+   status:"Engineering sign-off from customer still pending. Fabrication partially resumed on signed-off sections.",
+   info:"Industrial frame structure for automated conveyor system. 16 days overdue. Customer changed specification mid-build, adding an unplanned engineering review phase.",
+   root:"Dijkstra Tech requested a modified load spec on 28 April. Engineering review added 5 working days. Spec now confirmed — no further changes expected. Pieter Bakker is currently split between this job and WO-2026-0044.",
    history:[30,35,40,44,47,50,53,55,57,62],
-   root:"Customer changed spec mid-build. Engineering review added 5 days. Dijkstra Tech aware — their PM confirmed no further scope changes expected.",
-   actions:["Chase Dijkstra Tech engineering for sign-off today","Resume fabrication on signed-off sections now","Increase daily check-in cadence to track velocity","Flag to Arkad management if no sign-off by EOW"]},
-  {wo:"WO-2026-0031",c:"Hoogenbosch",    r:"Critical", p:"Medium",d:"04 Jun", dy:2, pc:78,v:-8, dp:"Assembly",
-   info:"Automated conveyor integration. 78% complete with 2 days to deadline. Velocity declining — at current rate, will miss deadline by 1–2 days.",
+   actions:["Confirm Dijkstra Tech engineering sign-off received in writing today","Assign Pieter Bakker exclusively to this job until 62% → 90%","Resume full fabrication on all sections immediately","Weekly progress call with Dijkstra PM every Monday until delivery"],
+   customer_risk:"MEDIUM — Dijkstra Tech is aware of spec change delay. Relationship stable but delivery credibility at risk.",
+   hrs_remaining:72, hrs_planned:190, wc:"WC-WLD-01"},
+  {wo:"WO-2026-0031",c:"Hoogenbosch",r:"Critical",p:"Medium",d:"04 Jun",dy:2,pc:78,v:-8,dp:"Assembly",
+   status:"Zone 3 cable reroute identified as final blocker. Stefan Visser working solo on it.",
+   info:"Automated conveyor integration. 78% complete with 2 days remaining. Velocity declining — Zone 3 integration requires unplanned cable rerouting adding 6 hours.",
+   root:"Cable routing conflict with existing infrastructure in Zone 3 was discovered during final integration testing. 6 additional hours required. Without support, deadline will be missed by 1-2 days.",
    history:[20,30,38,45,52,58,64,70,74,78],
-   root:"Final integration tests taking longer than scoped. Cable routing in Zone 3 requires rework — estimated 6 hours additional.",
-   actions:["Pull Kevin Smit to assist Zone 3 rework today","Authorise 3 hours overtime for assembly team","Confirm Hoogenbosch acceptance test date and flexibility","Prepare delay notification if test not completed by 03 Jun"]},
-  {wo:"WO-2026-0044",c:"Bakker & Zn.",   r:"High Risk",p:"High",  d:"08 Jun", dy:6, pc:55,v:-22,dp:"Welding",
+   actions:["Pull Kevin Smit from WO-0062 to assist Zone 3 rework — today","Authorise 3 hours overtime for assembly team tonight","Confirm Hoogenbosch acceptance test availability for 04 Jun","Prepare delay notification letter if Zone 3 not resolved by COB today"],
+   customer_risk:"LOW-MEDIUM — Hoogenbosch is a new customer. First delivery experience will set the relationship tone.",
+   hrs_remaining:22, hrs_planned:120, wc:"WC-ASM-01"},
+  {wo:"WO-2026-0044",c:"Bakker & Zn.",r:"High Risk",p:"High",d:"08 Jun",dy:6,pc:55,v:-22,dp:"Welding",
+   status:"Engineering spec now finalised. Pipe cutting started. Assembly on hold pending QC approval of first section.",
    info:"Custom pipe assembly for food processing line. 55% complete with 6 days remaining. At current velocity, projected completion is 12 Jun — 4 days late.",
+   root:"Upstream engineering delay: pressure rating documentation delivered 3 days late. Pipe cutting started but assembly hold pending QC sign-off of first weld section (expected today).",
    history:[10,15,20,25,30,35,40,45,50,55],
-   root:"Upstream engineering delay: pressure rating documentation not delivered on time. Pipe cutting started but assembly on hold pending final spec confirmation.",
-   actions:["Confirm engineering spec is finalised before proceeding","Allocate Pieter Bakker full-time to this job from tomorrow","Simulate catch-up plan: can 10hrs overtime close the gap?","Notify Bakker & Zn. of risk — get date flexibility if any"]},
-  {wo:"WO-2026-0055",c:"De Vries Ind.",  r:"Watch",    p:"Medium",d:"15 Jun", dy:13,pc:30,v:-5, dp:"Engineering",
-   info:"Custom automation frame structure. 30% complete — progressing but velocity dipping slightly. 13 days buffer provides cushion.",
+   actions:["Confirm QC sign-off on first weld section — if clear, resume full assembly","Assign Pieter Bakker full-time from tomorrow (once WO-0018 at 75%)","Model catch-up plan: 10h overtime over 3 days can close 3-day gap","Notify Bakker & Zn. proactively — offer updated completion date"],
+   customer_risk:"MEDIUM — Bakker & Zn. have a hard deadline tied to their own production line start. 4-day slip may trigger penalty clause.",
+   hrs_remaining:68, hrs_planned:150, wc:"WC-WLD-02"},
+  {wo:"WO-2026-0055",c:"De Vries Ind.",r:"Watch",p:"Medium",d:"15 Jun",dy:13,pc:30,v:-5,dp:"Engineering",
+   status:"Progressing normally. Minor velocity dip from reallocation last week. Recovered.",
+   info:"Custom automation frame structure. 30% complete — on watch but 13 days of buffer provides cushion.",
+   root:"Velocity dip caused by Dirk van Dijk covering WO-2026-0031 engineering queries last week. Back to normal pace now. Monitor weekly.",
    history:[5,8,12,16,20,23,26,28,30,30],
-   root:"Velocity dip caused by engineer reallocation last week (covered WO-2026-0031). Normal now, but keep monitoring.",
-   actions:["Monitor weekly — no action needed today","Ensure Dirk van Dijk is not reallocated again this cycle","Flag if velocity drops below −10% in next review"]},
-  {wo:"WO-2026-0062",c:"Peeters Eng.",   r:"On Track", p:"Low",   d:"20 Jun", dy:18,pc:42,v:4,  dp:"Assembly",
-   info:"Standard frame assembly. Slightly ahead of schedule. No issues flagged.",
+   actions:["Monitor weekly — no action needed today","Ensure Dirk van Dijk is not reallocated again this cycle","Flag if velocity drops below -10% in next review"],
+   customer_risk:"LOW — 13 days buffer and stable customer relationship.",
+   hrs_remaining:95, hrs_planned:140, wc:"WC-ENG-01"},
+  {wo:"WO-2026-0062",c:"Peeters Eng.",r:"On Track",p:"Low",d:"20 Jun",dy:18,pc:42,v:4,dp:"Assembly",
+   status:"Ahead of schedule. Kevin Smit performing well. All materials received.",
+   info:"Standard frame assembly. Slightly ahead of schedule. No issues.",
+   root:"Clean execution. Materials delivered on time. Kevin Smit and Stefan Visser working efficiently — actually ahead of checkpoint targets.",
    history:[5,8,12,18,24,29,34,38,40,42],
-   root:"Clean execution. Kevin Smit and Stefan Visser performing well on this job.",
-   actions:["No action required","Continue standard weekly check-in"]},
-  {wo:"WO-2026-0071",c:"Meijer Ind.",    r:"On Track", p:"Medium",d:"25 Jun", dy:23,pc:15,v:2,  dp:"Procurement",
-   info:"Early procurement phase. All materials ordered. Main supplier delivery confirmed for 01 Jun.",
+   actions:["No action required","Standard weekly check-in sufficient","Kevin Smit available for reallocation to WO-0031 if needed (low risk to this job)"],
+   customer_risk:"LOW — Peeters Eng. is a long-term customer. Job proceeding smoothly.",
+   hrs_remaining:82, hrs_planned:140, wc:"WC-ASM-02"},
+  {wo:"WO-2026-0071",c:"Meijer Ind.",r:"On Track",p:"Medium",d:"25 Jun",dy:23,pc:15,v:2,dp:"Procurement",
+   status:"All materials ordered. Supplier confirmed delivery by 01 Jun. Kickoff meeting scheduled.",
+   info:"Early procurement phase. 15% complete — procurement only. Production starts 02 Jun.",
+   root:"Clean start. Frank Peters has confirmed all material deliveries with suppliers. No risk at this stage.",
    history:[0,2,4,6,8,10,11,12,13,15],
-   root:"Clean start. Frank Peters managing supplier coordination efficiently.",
-   actions:["Confirm delivery address and receiving process with warehouse","Schedule kickoff meeting with production on 02 Jun"]},
+   actions:["Confirm delivery address and receiving schedule with warehouse","Schedule production kickoff meeting for 02 Jun","No other action required"],
+   customer_risk:"LOW — Early stage, 23 days buffer.",
+   hrs_remaining:0, hrs_planned:0, wc:"WC-PROC"},
 ];
 let JOBS=BASE.map(j=>({...j}));
 
 const DEPTS=[
-  {n:"Welding",    s:"Weld",cap:320,al:295,fr:25, u:92,fw:88,
+  {n:"Welding",s:"Weld",cap:320,al:295,fr:25,u:92,fw:88,
    jobs:["WO-2026-0007","WO-2026-0018","WO-2026-0044"],
-   note:"3 overdue or at-risk jobs. 2 welders (J. Hartmann, P. Bakker) at full capacity. L. Meijer absent.",
-   risk:"High — bottleneck dept. No capacity for new jobs this week.",
-   centres:["WC-WLD-01: 138/120 hrs","WC-WLD-02: 105/110 hrs"]},
-  {n:"Assembly",   s:"Asm", cap:240,al:183,fr:57, u:76,fw:62,
+   wcs:[{n:"WC-WLD-01",cap:160,al:195,hrs:"195/160",status:"OVER"},
+        {n:"WC-WLD-02",cap:160,al:100,hrs:"100/160",status:"OK"}],
+   note:"3 active jobs, all at-risk or overdue. Welding is the current bottleneck. Lars Meijer absent. Pieter Bakker split across two at-risk jobs.",
+   risk:"BOTTLENECK — No capacity for new jobs. WC-WLD-01 already over capacity.",
+   action:"Prioritise WO-0007 and WO-0018. Consider overtime. Do not accept new welding jobs this week.",
+   trend:"Utilisation has been above 85% for 3 consecutive weeks."},
+  {n:"Assembly",s:"Asm",cap:240,al:183,fr:57,u:76,fw:62,
    jobs:["WO-2026-0031","WO-2026-0062"],
-   note:"WO-0031 critical — 2 days remaining. WO-0062 ahead of schedule. 57 hrs free to absorb reallocation.",
-   risk:"Medium — watch WO-0031 closely.",
-   centres:["WC-ASM-01: 90/95 hrs","WC-ASM-02: 93/88 hrs"]},
-  {n:"Engineering",s:"Eng", cap:160,al:104,fr:56, u:65,fw:42,
+   wcs:[{n:"WC-ASM-01",cap:120,al:90,hrs:"90/95",status:"OK"},
+        {n:"WC-ASM-02",cap:120,al:93,hrs:"93/88",status:"WATCH"}],
+   note:"WO-0031 is critical with 2 days to deadline. WO-0062 is on track. 57 free hours available — best reallocation target.",
+   risk:"WATCH — WO-0031 needs immediate attention. WC-ASM-02 slightly over.",
+   action:"Pull Kevin Smit to support WO-0031 Zone 3 rework. 57 hrs available for Welding reallocation.",
+   trend:"Stable. Slight load increase expected when WO-0031 enters final testing."},
+  {n:"Engineering",s:"Eng",cap:160,al:104,fr:56,u:65,fw:42,
    jobs:["WO-2026-0055"],
-   note:"1 job in progress. 56 hrs free this week. Dirk van Dijk is sole engineer.",
-   risk:"Low — healthy capacity buffer.",
-   centres:["WC-ENG-01: 72/80 hrs"]},
-  {n:"Procurement",s:"Proc",cap:80, al:50, fr:30, u:62,fw:38,
+   wcs:[{n:"WC-ENG-01",cap:160,al:104,hrs:"72/80",status:"OK"}],
+   note:"1 active job. Dirk van Dijk is the sole engineer — single point of risk if absent. 56 hrs free.",
+   risk:"LOW — Healthy buffer. Watch for single-point-of-risk if Dirk van Dijk is unavailable.",
+   action:"No action needed. Available for cross-support if needed.",
+   trend:"Stable. Forward load 42% — well within capacity."},
+  {n:"Procurement",s:"Proc",cap:80,al:50,fr:30,u:62,fw:38,
    jobs:["WO-2026-0071"],
-   note:"1 job in procurement phase. Frank Peters managing. 30 hrs free.",
-   risk:"Low — no bottleneck risk.",
-   centres:["Standard purchasing cycle"]},
-  {n:"QC",         s:"QC",  cap:80, al:41, fr:39, u:51,fw:22,
+   wcs:[{n:"WC-PROC",cap:80,al:50,hrs:"50/80",status:"OK"}],
+   note:"1 job in procurement phase. 30 hrs free. Frank Peters managing all supplier coordination.",
+   risk:"LOW — No bottleneck risk.",
+   action:"Monitor delivery schedule for WO-0071 materials (due 01 Jun).",
+   trend:"Stable. Load will increase when WO-0071 moves to production on 02 Jun."},
+  {n:"QC",s:"QC",cap:80,al:41,fr:39,u:51,fw:22,
    jobs:[],
-   note:"Ahead of load. 39 hrs available. No immediate QC demands this week.",
-   risk:"None — available for additional throughput.",
-   centres:["QC-01: 41/80 hrs"]},
+   wcs:[{n:"QC-01",cap:80,al:41,hrs:"41/80",status:"OK"}],
+   note:"No jobs currently in QC. 39 hrs available. WO-0044 first weld section pending QC approval today.",
+   risk:"NONE — Available for additional throughput.",
+   action:"Sign off WO-0044 first weld section today to unblock assembly.",
+   trend:"Forward load 22% — well within capacity."},
 ];
 
 const STAFF=[
-  {n:"Jens Hartmann", dp:"Welding",     ro:"Welder Sr",    av:40,ab:false, jobs:["WO-2026-0007"],         skill:"TIG/MIG certified. 12 years experience. Key resource for pressure vessel work."},
-  {n:"Lars Meijer",   dp:"Welding",     ro:"Welder Jr",    av:0, ab:true,  jobs:[],                        skill:"MIG welder, 3 years. Return expected Monday. Absence impacting WO-0007 and WO-0044."},
-  {n:"Pieter Bakker", dp:"Welding",     ro:"Welder Sr",    av:40,ab:false, jobs:["WO-2026-0018","WO-2026-0044"], skill:"MIG/MAG certified. 9 years experience. Currently split between two at-risk jobs."},
-  {n:"Stefan Visser", dp:"Assembly",    ro:"Assembler Sr", av:40,ab:false, jobs:["WO-2026-0031"],          skill:"Mechanical assembly, automation systems. 7 years. Leading WO-0031."},
-  {n:"Kevin Smit",    dp:"Assembly",    ro:"Assembler Jr", av:40,ab:false, jobs:["WO-2026-0062"],          skill:"General assembly. 2 years. Supporting WO-0062. Available for reallocation."},
-  {n:"Dirk van Dijk", dp:"Engineering", ro:"Engineer Sr",  av:40,ab:false, jobs:["WO-2026-0055"],          skill:"Mechanical design & custom automation. 11 years. Sole engineer — single point of risk."},
-  {n:"Frank Peters",  dp:"Procurement", ro:"Buyer Sr",     av:40,ab:false, jobs:["WO-2026-0071"],          skill:"Supplier management, MSOFT procurement module. 6 years."},
+  {n:"Jens Hartmann",dp:"Welding",ro:"Welder Sr",av:40,ab:false,
+   jobs:["WO-2026-0007"],exp:"12 years",cert:"TIG/MIG certified. Pressure vessel specialist.",
+   risk:"Key resource — primary welder for WO-0007. No backup if unavailable.",
+   week:"Monday-Friday. 08:00-17:00. No planned leave.",
+   note:"Currently sole welder on WO-0007 since Lars Meijer absence. Workload critical."},
+  {n:"Lars Meijer",dp:"Welding",ro:"Welder Jr",av:0,ab:true,
+   jobs:[],exp:"3 years",cert:"MIG certified.",
+   risk:"ABSENT — Return expected Monday. His absence directly impacts WO-0007 and WO-0044 capacity.",
+   week:"Absent this week. Medical leave. Expected return: Monday 26 May.",
+   note:"Without Lars, Welding has 40 fewer hours this week. Primary driver of current bottleneck."},
+  {n:"Pieter Bakker",dp:"Welding",ro:"Welder Sr",av:40,ab:false,
+   jobs:["WO-2026-0018","WO-2026-0044"],exp:"9 years",cert:"MIG/MAG certified. Structural steel specialist.",
+   risk:"SPLIT across two at-risk jobs. Neither job is getting full attention.",
+   week:"Monday-Friday. Currently alternating days between WO-0018 and WO-0044.",
+   note:"Recommend: assign exclusively to WO-0018 until 75% complete, then full-time WO-0044."},
+  {n:"Stefan Visser",dp:"Assembly",ro:"Assembler Sr",av:40,ab:false,
+   jobs:["WO-2026-0031"],exp:"7 years",cert:"Mechanical assembly. Automation systems. Conveyor specialist.",
+   risk:"Working solo on WO-0031 Zone 3. Needs support to hit deadline.",
+   week:"Monday-Friday. Full-time on WO-0031.",
+   note:"Capable of completing Zone 3 alone but will miss deadline. Kevin Smit reallocation resolves this."},
+  {n:"Kevin Smit",dp:"Assembly",ro:"Assembler Jr",av:40,ab:false,
+   jobs:["WO-2026-0062"],exp:"2 years",cert:"General mechanical assembly.",
+   risk:"LOW on WO-0062 — job is ahead of schedule. Can be reallocated without risk.",
+   week:"Monday-Friday. Full-time on WO-0062.",
+   note:"Best reallocation candidate. Moving Kevin to WO-0031 for 2 days resolves the Zone 3 bottleneck."},
+  {n:"Dirk van Dijk",dp:"Engineering",ro:"Engineer Sr",av:40,ab:false,
+   jobs:["WO-2026-0055"],exp:"11 years",cert:"Mechanical design. Custom automation. PLC programming.",
+   risk:"SINGLE POINT OF RISK — sole engineer. Any absence creates immediate exposure.",
+   week:"Monday-Friday. Full-time on WO-0055.",
+   note:"No engineer backup exists. Consider cross-training or external resource for business continuity."},
+  {n:"Frank Peters",dp:"Procurement",ro:"Buyer Sr",av:40,ab:false,
+   jobs:["WO-2026-0071"],exp:"6 years",cert:"Supplier management. MSOFT procurement module.",
+   risk:"LOW — Stable workload. 30 hrs free this week.",
+   week:"Monday-Friday.",
+   note:"All WO-0071 materials confirmed. Available to support other procurement needs."},
 ];
 const OTD=[94,91,88,85,82,79,84,87];
 
-/* ━━ STATE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+// OTD context
+const OTD_DETAIL=[
+  {w:"W1",v:94,note:"Strong start. All welding jobs on track."},
+  {w:"W2",v:91,note:"Minor slip on WO-0018 spec change. Within target."},
+  {w:"W3",v:88,note:"First week below 90%. WO-0007 material delay begins."},
+  {w:"W4",v:85,note:"WO-0018 enters hold. OTD at threshold."},
+  {w:"W5",v:82,note:"Two overdue jobs confirmed. Lars Meijer absence begins."},
+  {w:"W6",v:79,note:"LOWEST POINT. Three jobs behind schedule simultaneously."},
+  {w:"W7",v:84,note:"Partial recovery. WO-0031 and WO-0062 progressing."},
+  {w:"W8",v:87,note:"Improving. Dependent on WO-0031 delivery this week."},
+];
+
+// STATE
 let pg=0,rF="All",dF="All",sJ=null,aC=null,cDF="All",rDF="All",rRF="All";
-let selDept=null,selStaff=null,selSig=null;
+let selDept=null,selStaff=null,selSig=null,selOTD=null,selRiskRow=null;
 let CH={},rc=0,secs=0,tsInt=null;
 const chks=Array(5).fill(false);
-const jobActions={};
-JOBS.forEach(j=>jobActions[j.wo]=Array(j.actions.length).fill(false));
+const jobActs={};
+BASE.forEach(j=>{jobActs[j.wo]=Array(j.actions.length).fill(false)});
 
-/* ━━ HELPERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const ucH=u=>u>=85?"#d95f5f":u>=75?"#c4861e":"#4d9e72";
+// HELPERS
+const ucH=u=>u>=85?"#c0303a":u>=75?"#a06010":"#1e7a4a";
+const ucV=u=>u>=85?"var(--red)":u>=75?"var(--amb)":"var(--grn)";
 const rbg=r=>({"Overdue":"ov","Critical":"cr","High Risk":"hr","Watch":"wa","On Track":"ok"})[r]||"ok";
-const vp=v=>`<span class="vp ${v<0?"vn":"vps"}">${v<0?"↓":"↑"}${Math.abs(v)}%</span>`;
-const pb=(p,c)=>`<div class="pb"><div class="pb-f" style="width:${p}%;background:${c||(p>=66?"#4d9e72":p>=40?"#c4861e":"#d95f5f")}"></div></div>`;
+const vp=v=>`<span class="vp ${v<0?"vn":"vps"}">${v<0?"&#8595;":"&#8593;"}${Math.abs(v)}%</span>`;
+const pb=(p,c)=>`<div class="pb"><div class="pb-f" style="width:${p}%;background:${c||(p>=66?"#1e7a4a":p>=40?"#a06010":"#c0303a")}"></div></div>`;
 function dC(){Object.values(CH).forEach(c=>{try{c.destroy()}catch(e){}});CH={}}
 const fJ=()=>JOBS.filter(j=>(rF==="All"||j.r===rF)&&(dF==="All"||j.dp===dF));
 const fD=()=>DEPTS.filter(d=>cDF==="All"||d.n===cDF);
 const fS=()=>STAFF.filter(s=>(rDF==="All"||s.dp===rDF)&&(rRF==="All"||s.ro===rRF));
+function cell(k,v,col){return'<div class="dr-cell"><div class="dr-key">'+k+'</div><div class="dr-val" style="'+(col?'color:'+col:'')+'">' +v+'</div></div>';}
+function cellSm(k,v){return`<div class="dr-cell"><div class="dr-key">${k}</div><div class="dr-val sm">${v}</div></div>`}
 
-/* ━━ TIMESTAMP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+// TIMESTAMP
 function startTs(){
   clearInterval(tsInt);secs=0;
-  tsInt=setInterval(()=>{
-    secs++;
-    const el=document.getElementById("ts");
+  tsInt=setInterval(()=>{secs++;const el=document.getElementById("ts");
     if(!el)return;
     el.textContent=secs<5?"Updated just now":secs<60?`Updated ${secs}s ago`:`Updated ${Math.floor(secs/60)}m ago`;
   },1000);
 }
 
-/* ━━ REFRESH ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+// REFRESH
 function doRefresh(){
   const rb=document.getElementById("rbtn"),ld=document.getElementById("ldot");
   if(!rb||rb.classList.contains("spin"))return;
-  rb.classList.add("spin");ld.classList.add("loading");
+  rb.classList.add("spin");ld.classList.add("spin");
   setTimeout(()=>{
-    rc++;
-    JOBS=BASE.map(j=>({...j}));
-    if(rc%2===1){
-      const j=JOBS.find(x=>x.wo==="WO-2026-0031");
-      if(j){j.v=-12;j.pc=76;}
-    }
+    rc++;JOBS=BASE.map(j=>({...j}));
+    if(rc%2===1){const j=JOBS.find(x=>x.wo==="WO-2026-0031");if(j){j.v=-12;j.pc=76;}}
     const f=document.createElement("div");f.className="rflash";document.body.appendChild(f);
     setTimeout(()=>f.remove(),600);
-    rb.classList.remove("spin");ld.classList.remove("loading");
+    rb.classList.remove("spin");ld.classList.remove("spin");
     startTs();draw();
   },900);
 }
 
-/* ━━ CHART CONFIG ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+// CHART CONFIG
 const CX={responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{display:false},tooltip:{backgroundColor:"#18181b",borderColor:"#2a2a30",borderWidth:1,titleColor:"#e8e8ec",bodyColor:"#9898a8",padding:10,cornerRadius:2,titleFont:{family:"'IBM Plex Mono',monospace",size:10},bodyFont:{family:"'IBM Plex Mono',monospace",size:10}}},
-  scales:{x:{ticks:{color:"#55555f",font:{family:"'IBM Plex Mono',monospace",size:9}},grid:{display:false},border:{color:"#2a2a30"}},
-          y:{ticks:{color:"#55555f",font:{family:"'IBM Plex Mono',monospace",size:9}},grid:{color:"rgba(255,255,255,.03)"},border:{color:"transparent"}}}};
-const CXL={...CX,plugins:{...CX.plugins,legend:{display:true,labels:{color:"#55555f",font:{family:"'IBM Plex Mono',monospace",size:8},boxWidth:18,boxHeight:1}}}};
+  plugins:{legend:{display:false},tooltip:{backgroundColor:"#ffffff",borderColor:"#d0d4dc",borderWidth:1,titleColor:"#1a1d27",bodyColor:"#4a5068",padding:10,cornerRadius:2,titleFont:{family:"IBM Plex Mono,monospace",size:10},bodyFont:{family:"IBM Plex Mono,monospace",size:10}}},
+  scales:{x:{ticks:{color:"#7a80a0",font:{family:"IBM Plex Mono,monospace",size:9}},grid:{display:false},border:{color:"#d0d4dc"}},
+          y:{ticks:{color:"#7a80a0",font:{family:"IBM Plex Mono,monospace",size:9}},grid:{color:"rgba(0,0,0,.04)"},border:{color:"transparent"}}}};
+const CXL={...CX,plugins:{...CX.plugins,legend:{display:true,labels:{color:"#7a80a0",font:{family:"IBM Plex Mono,monospace",size:8},boxWidth:18,boxHeight:1}}}};
 
-/* ━━ PAGE 0 — OPERATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ══ PAGE 0 — OPERATIONS ══════════════════════════════════════ */
 function p0(){
   const fj=fJ();
   const ov=fj.filter(j=>j.r==="Overdue").length,cr=fj.filter(j=>j.r==="Critical").length;
   const bh=fj.filter(j=>j.v<0&&j.r!=="Overdue"&&j.r!=="Critical").length,ok=fj.filter(j=>j.v>=0).length;
   const cards=[
     {v:ov,l:"Overdue",h:"past due date",c:"r",f:"Overdue",
-     hint:`${ov} jobs past their contractual delivery date. Immediate customer communication required. Combined revenue at risk: estimated.`},
+     hint:`${ov} jobs are past their contractual delivery date.`,
+     breakdown:`<div style="margin-top:8px;font-size:9px;color:var(--t3);font-family:var(--m);line-height:1.8">
+       WO-2026-0007 &mdash; ${Math.abs(JOBS[0].dy)} days overdue &mdash; Van der Berg<br>
+       WO-2026-0018 &mdash; ${Math.abs(JOBS[1].dy)} days overdue &mdash; Dijkstra Tech<br>
+       <span style="color:var(--red)">Immediate customer communication required on both.</span>
+     </div>`},
     {v:cr,l:"Critical",h:"due within 3 days",c:"r",f:"Critical",
-     hint:"Due within 72 hours. At current velocity, at least 1 will be missed. Prioritise assembly resources today."},
-    {v:bh,l:"Behind",h:"negative velocity",c:"a",f:"",
-     hint:`${bh} jobs falling behind expected progress. Velocity is negative — they are not just slow, they are getting slower.`},
+     hint:"Due within 72 hours. At current velocity, deadline will be missed without intervention today.",
+     breakdown:`<div style="margin-top:8px;font-size:9px;color:var(--t3);font-family:var(--m);line-height:1.8">
+       WO-2026-0031 &mdash; Hoogenbosch &mdash; due 04 Jun (${JOBS[2].dy} days)<br>
+       Zone 3 cable rework is the blocker. Needs Kevin Smit support today.<br>
+       <span style="color:var(--amb)">Risk: 1-2 day slip without action.</span>
+     </div>`},
+    {v:bh,l:"Behind schedule",h:"negative velocity",c:"a",f:"",
+     hint:`${bh} more jobs are falling behind expected progress. Velocity is negative — not just slow, actively decelerating.`,
+     breakdown:`<div style="margin-top:8px;font-size:9px;color:var(--t3);font-family:var(--m);line-height:1.8">
+       WO-2026-0044 &mdash; velocity ${JOBS[3].v}% &mdash; projected 4 days late<br>
+       WO-2026-0055 &mdash; velocity ${JOBS[4].v}% &mdash; within buffer, monitor<br>
+       <span style="color:var(--amb)">Combined: both will miss deadlines without intervention.</span>
+     </div>`},
     {v:ok,l:"On track",h:"no immediate risk",c:"g",f:"On Track",
-     hint:"These jobs are on or ahead of schedule. No intervention needed."},
+     hint:`${ok} jobs are on or ahead of schedule. No intervention required.`,
+     breakdown:`<div style="margin-top:8px;font-size:9px;color:var(--t3);font-family:var(--m);line-height:1.8">
+       WO-2026-0062 &mdash; Peeters Eng. &mdash; +4% velocity &mdash; ahead of schedule<br>
+       WO-2026-0071 &mdash; Meijer Ind. &mdash; procurement phase, 23 days buffer<br>
+       <span style="color:var(--grn)">Kevin Smit (WO-0062) available for reallocation.</span>
+     </div>`},
   ];
   return`
 <div class="fb">
   <span class="fl">Filter</span>
   <select class="fs" onchange="rF=this.value;aC=null;draw()">
-    <option value="All">Risk — All</option><option>Overdue</option><option>Critical</option><option>High Risk</option><option>Watch</option><option>On Track</option>
+    <option value="All">Risk &mdash; All</option><option>Overdue</option><option>Critical</option><option>High Risk</option><option>Watch</option><option>On Track</option>
   </select>
   <select class="fs" onchange="dF=this.value;aC=null;draw()">
-    <option value="All">Department — All</option>${DEPTS.map(d=>`<option>${d.n}</option>`).join("")}
+    <option value="All">Department &mdash; All</option>${DEPTS.map(d=>`<option>${d.n}</option>`).join("")}
   </select>
-  <span class="fc">${fj.length} / ${JOBS.length} &nbsp;·&nbsp; click a card to filter &amp; expand</span>
+  <span class="fc">${fj.length} / ${JOBS.length} jobs &nbsp;&middot;&nbsp; click a card to filter &amp; expand</span>
 </div>
 <div class="g4">${cards.map(m=>`
   <div class="mc${m.f?" cp":""}${aC===m.f&&m.f?" on":""}" ${m.f?`onclick="tc('${m.f}')"`:""}>
-    <div class="mc-v ${m.c} fl">${m.v}</div>
+    <div class="mc-v ${m.c} ani">${m.v}</div>
     <div class="mc-l">${m.l}</div>
     <div class="mc-s">${m.h}</div>
-    ${m.hint?`<div class="mc-hint">${m.hint}</div>`:""}
+    <div class="mc-hint">${m.hint}${m.breakdown||""}</div>
   </div>`).join("")}</div>
-<div class="al am"><div class="al-bar" style="background:var(--amb)"></div>Reallocation signal active — 5 jobs due within 3 days · Welding at 92% · <a onclick="go(4)">View full signal breakdown →</a></div>
+<div class="al am"><div class="al-bar" style="background:var(--amb)"></div>Reallocation signal active &mdash; 5 jobs due within 3 days &nbsp;&middot;&nbsp; Welding at 92% &nbsp;&middot;&nbsp; <a onclick="go(4)">View full signal breakdown &#8594;</a></div>
 <div class="g2">
   <div class="cc">
-    <div class="ct">Jobs by risk level</div>
-    <div class="hr-w">${[
-      {l:"Overdue",v:ov,max:30,c:"var(--red)"},{l:"Critical",v:cr,max:30,c:"#a84040"},
-      {l:"High Risk",v:2,max:30,c:"var(--amb)"},{l:"Watch",v:10,max:30,c:"#806010"},{l:"On Track",v:ok,max:30,c:"var(--grn)"},
-    ].map(b=>`<div class="hrow"><span class="hl">${b.l}</span><div class="ht"><div class="hf" style="width:${Math.round(Math.max(b.v,0)/b.max*100)}%;background:${b.c}"></div></div><span class="hp" style="color:${b.c}">${b.v}</span></div>`).join("")}</div>
+    <div class="ct">Jobs by risk level &mdash; click a row for context</div>
+    ${[
+      {l:"Overdue",v:ov,max:30,c:"var(--red)",detail:"WO-0007 (21d) and WO-0018 (16d). Both in Welding. Both impacted by Lars Meijer absence and resource split."},
+      {l:"Critical",v:cr,max:30,c:"#c0303a",detail:"WO-0031 (Hoogenbosch). 78% complete. Zone 3 cable reroute is the final blocker. Needs Kevin Smit today."},
+      {l:"High Risk",v:2,max:30,c:"var(--amb)",detail:"WO-0044 (Bakker & Zn.) velocity -22%. QC sign-off on first section expected today — if clear, assembly resumes."},
+      {l:"Watch",v:10,max:30,c:"#a06010",detail:"WO-0055 (De Vries) velocity -5%. Within buffer. Dirk van Dijk back to full speed this week."},
+      {l:"On Track",v:ok,max:30,c:"var(--grn)",detail:"WO-0062 ahead of schedule. WO-0071 in early procurement. Kevin Smit available for reallocation."},
+    ].map((b,i)=>`
+    <div class="hrow" style="cursor:pointer;padding:4px 0;border-radius:2px;transition:background .1s" onclick="selRiskRow=selRiskRow===${i}?null:${i};renderRiskBars()" id="rb${i}">
+      <span class="hl">${b.l}</span>
+      <div class="ht"><div class="hf" style="width:${Math.round(Math.max(b.v,0)/b.max*100)}%;background:${b.c}"></div></div>
+      <span class="hp" style="color:${b.c}">${b.v}</span>
+    </div>
+    <div id="rd${i}" style="display:none;margin:0 0 6px 0">
+      <div class="row-detail">${b.detail}</div>
+    </div>`).join("")}
   </div>
   <div class="cc">
-    <div class="ct">On-time delivery % — weekly vs 90% target</div>
-    <div class="cb" style="height:150px"><canvas id="c0"></canvas></div>
+    <div class="ct">On-time delivery % &mdash; weekly vs 90% target &mdash; click a week</div>
+    <div class="cb" style="height:130px"><canvas id="c0"></canvas></div>
+    <div id="otd-detail" style="margin-top:8px"></div>
   </div>
 </div>`;
 }
+function renderRiskBars(){
+  document.getElementById("cv").innerHTML=p0();
+  setTimeout(()=>a0(),60);
+}
 function a0(){
   const ctx=document.getElementById("c0");if(!ctx)return;
-  const g=ctx.getContext("2d").createLinearGradient(0,0,0,150);
+  const g=ctx.getContext("2d").createLinearGradient(0,0,0,130);
   g.addColorStop(0,"rgba(91,141,212,.15)");g.addColorStop(1,"rgba(91,141,212,0)");
-  CH.o=new Chart(ctx,{type:"line",data:{labels:["W1","W2","W3","W4","W5","W6","W7","W8"],
-    datasets:[{label:"OTD %",data:OTD,borderColor:"#5b8dd4",backgroundColor:g,borderWidth:1.5,pointRadius:3,pointBackgroundColor:"#5b8dd4",tension:.4,fill:true},
-               {label:"90% target",data:[90,90,90,90,90,90,90,90],borderColor:"rgba(196,134,30,.4)",borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false}]},
-    options:{...CXL,scales:{...CX.scales,y:{...CX.scales.y,min:70,max:100,ticks:{...CX.scales.y.ticks,callback:v=>v+"%"}}}}});
+  CH.o=new Chart(ctx,{type:"line",data:{
+    labels:OTD_DETAIL.map(d=>d.w),
+    datasets:[
+      {label:"OTD %",data:OTD,borderColor:"#2460b0",backgroundColor:g,borderWidth:2,pointRadius:5,pointBackgroundColor:OTD.map(v=>v<90?"#c0303a":"#2460b0"),pointBorderColor:OTD.map(v=>v<90?"#c0303a":"#2460b0"),tension:.35,fill:true},
+      {label:"Target 90%",data:[90,90,90,90,90,90,90,90],borderColor:"rgba(160,96,16,.5)",borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false},
+    ]},
+    options:{...CXL,
+      scales:{...CX.scales,y:{...CX.scales.y,min:70,max:100,ticks:{...CX.scales.y.ticks,callback:v=>v+"%"}}},
+      onClick:(e,els)=>{
+        if(!els.length)return;
+        const i=els[0].index;
+        const d=OTD_DETAIL[i];
+        const el=document.getElementById("otd-detail");
+        if(el){
+          const isOpen=el.innerHTML.includes(d.w);
+          el.innerHTML=isOpen?"":
+            `<div class="xpand">
+              <div style="font-family:var(--m);font-size:9px;color:var(--gold);margin-bottom:5px">${d.w} &nbsp;&middot;&nbsp; ${d.v}% OTD &nbsp;&middot;&nbsp; ${d.v<90?"&#9660; Below target":"&#9650; On target"}</div>
+              <div style="font-size:10px;color:var(--t2);font-weight:300">${d.note}</div>
+            </div>`;
+        }
+      }
+    }
+  });
+  // restore risk bar rows
+  if(selRiskRow!==null){
+    for(let i=0;i<5;i++){
+      const el=document.getElementById("rd"+i);
+      if(el)el.style.display=selRiskRow===i?"block":"none";
+    }
+  }
 }
 
-/* ━━ PAGE 1 — CAPACITY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ══ PAGE 1 — CAPACITY ════════════════════════════════════════ */
 function p1(){
   const fd=fD();
-  const tC=fd.reduce((a,d)=>a+d.cap,0);
-  const tA=fd.reduce((a,d)=>a+d.al,0);
-  const tF=fd.reduce((a,d)=>a+d.fr,0);
-  const aU=tC?Math.round(tA/tC*100):0;
+  const tC=fd.reduce((a,d)=>a+d.cap,0),tA=fd.reduce((a,d)=>a+d.al,0);
+  const tF=fd.reduce((a,d)=>a+d.fr,0),aU=tC?Math.round(tA/tC*100):0;
   return`
 <div class="fb">
   <span class="fl">Filter</span>
-  <select class="fs" onchange="cDF=this.value;selDept=null;draw()"><option value="All">Department — All</option>${DEPTS.map(d=>`<option value="${d.n}">${d.n}</option>`).join("")}</select>
-  <select class="fs"><option>Week — Current</option><option>Week −1</option><option>Week −2</option></select>
-  <select class="fs"><option>Work Centre — All</option><option>WC-WLD-01</option><option>WC-WLD-02</option><option>WC-ASM-01</option><option>WC-ENG-01</option></select>
-  <span class="fc">${fd.length} dept${fd.length!==1?"s":""} · click a card for full breakdown</span>
+  <select class="fs" onchange="cDF=this.value;selDept=null;draw()"><option value="All">Department &mdash; All</option>${DEPTS.map(d=>`<option value="${d.n}">${d.n}</option>`).join("")}</select>
+  <select class="fs"><option>Week &mdash; Current</option><option>Week &minus;1</option><option>Week &minus;2</option></select>
+  <select class="fs"><option>Work Centre &mdash; All</option><option>WC-WLD-01</option><option>WC-WLD-02</option><option>WC-ASM-01</option><option>WC-ENG-01</option></select>
+  <span class="fc">${fd.length} dept${fd.length!==1?"s":""} &nbsp;&middot;&nbsp; click a card for full breakdown</span>
 </div>
-
 <div class="g5">${fd.map(d=>`
   <div class="dept-card${selDept===d.n?" on":""}" onclick="selDept=selDept==='${d.n}'?null:'${d.n}';draw()">
     <div class="dept-card-name">${d.n}</div>
     <div class="dept-card-util" style="color:${ucH(d.u)}">${d.u}%</div>
     <div class="dept-card-sub">${d.fr} hrs free</div>
     <div class="dept-card-bar"><div class="dept-card-fill" style="width:${d.u}%;background:${ucH(d.u)}"></div></div>
-  </div>`).join("")}</div>
-
-${selDept?deptDetail():""}
-
+  </div>`).join("")}
+</div>
+${selDept?deptXpand():""}
 <div class="g2">
   <div class="cc">
     <div class="ct">Weekly capacity summary</div>
     <table style="font-size:10px">
-      <thead><tr><th>Department</th><th>Capacity</th><th>Allocated</th><th>Free</th><th>Util</th></tr></thead>
+      <thead><tr><th>Department</th><th>Capacity</th><th>Allocated</th><th>Free</th><th>Util</th><th>Trend</th></tr></thead>
       <tbody>
-        ${fd.map(d=>`<tr style="background:${d.u>=85?"rgba(217,95,95,.03)":d.u>=75?"rgba(196,134,30,.03)":"transparent"}">
-          <td style="font-weight:400;color:var(--t1)">${d.n}</td>
+        ${fd.map(d=>`<tr style="background:${d.u>=85?"rgba(217,95,95,.03)":d.u>=75?"rgba(196,134,30,.03)":"transparent"}" onclick="selDept=selDept==='${d.n}'?null:'${d.n}';draw()" title="Click for detail">
+          <td style="font-weight:400;color:var(--t1);cursor:pointer">${d.n}</td>
           <td style="font-family:var(--m)">${d.cap}</td>
           <td style="font-family:var(--m)">${d.al}</td>
           <td style="font-family:var(--m);font-weight:500;color:${d.fr<30?"var(--red)":"var(--grn)"}">${d.fr}</td>
           <td style="font-family:var(--m);font-weight:500;color:${ucH(d.u)}">${d.u}%</td>
+          <td style="font-size:9px;color:var(--t3)">${d.u>=85?"&#9650;&#9650; Over":d.u>=75?"&#9650; Watch":"&#8212; Stable"}</td>
         </tr>`).join("")}
-        ${fd.length>1?`<tr style="border-top:1px solid var(--b2)">
-          <td style="color:var(--t3);font-size:9px">Total</td>
-          <td style="font-family:var(--m);color:var(--t3)">${tC}</td>
-          <td style="font-family:var(--m);color:var(--t3)">${tA}</td>
+        ${fd.length>1?`<tr style="border-top:1px solid var(--b2)"><td style="color:var(--t3);font-size:9px">Total</td>
+          <td style="font-family:var(--m);color:var(--t3)">${tC}</td><td style="font-family:var(--m);color:var(--t3)">${tA}</td>
           <td style="font-family:var(--m);color:var(--t3)">${tF}</td>
-          <td style="font-family:var(--m);color:var(--t3)">${aU}%</td>
-        </tr>`:""}
+          <td style="font-family:var(--m);color:${ucH(aU)};font-weight:500">${aU}%</td><td></td></tr>`:""}
       </tbody>
     </table>
   </div>
   <div class="cc">
-    <div class="ct">Utilisation % by department — 85% = alert threshold</div>
+    <div class="ct">Utilisation % by department &mdash; 85% = alert threshold</div>
     <div class="cb" style="height:175px"><canvas id="c1"></canvas></div>
   </div>
 </div>
-
 <div class="cc">
-  <div class="ct">Forward load — 2-week horizon · 85% = bottleneck threshold</div>
+  <div class="ct">Forward load &mdash; 2-week horizon &nbsp;&middot;&nbsp; 85% = bottleneck threshold</div>
   <div class="hr-w">${fd.map(d=>`
-    <div class="hrow">
+    <div class="hrow" style="cursor:pointer" onclick="selDept=selDept==='${d.n}'?null:'${d.n}';draw()">
       <span class="hl">${d.n}</span>
-      <div class="ht" style="height:5px">
-        <div class="hf" style="width:${d.fw}%;background:${ucH(d.fw)}"></div>
-        <div class="tl" style="left:85%"></div>
-      </div>
+      <div class="ht" style="height:5px"><div class="hf" style="width:${d.fw}%;background:${ucH(d.fw)}"></div><div class="tl" style="left:85%"></div></div>
       <span class="hp" style="color:${ucH(d.fw)}">${d.fw}%</span>
+      ${d.fw>=85?`<span style="font-size:8px;color:var(--red);font-family:var(--m)">&#9650; OVER</span>`:""}
     </div>`).join("")}
   </div>
 </div>
-<div class="al re"><div class="al-bar" style="background:var(--red)"></div>Bottleneck — Welding 92% now · Forward load 88% for next 2 weeks · Queued jobs cannot start</div>`;
+<div class="al re"><div class="al-bar" style="background:var(--red)"></div>Bottleneck &mdash; Welding 92% now &nbsp;&middot;&nbsp; Forward load 88% for next 2 weeks &nbsp;&middot;&nbsp; Queued jobs cannot start</div>`;
 }
-
-function deptDetail(){
+function deptXpand(){
   const d=DEPTS.find(x=>x.n===selDept);if(!d)return"";
   const jobs=JOBS.filter(j=>d.jobs.includes(j.wo));
-  return`<div class="dept-detail">
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:12px">
-    <div><div class="dr-key">Status</div><div style="font-size:11px;color:${ucH(d.u)};font-family:var(--m);font-weight:500">${d.u>=85?"BOTTLENECK":d.u>=75?"WATCH":"HEALTHY"} · ${d.u}%</div></div>
-    <div><div class="dr-key">Capacity this week</div><div style="font-size:11px;color:var(--t1);font-family:var(--m)">${d.al} / ${d.cap} hrs allocated</div></div>
-    <div><div class="dr-key">Risk assessment</div><div style="font-size:11px;color:var(--t2);font-weight:300">${d.risk}</div></div>
+  return`<div class="xpand">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+    ${cell("Status",d.u>=85?"BOTTLENECK":d.u>=75?"WATCH":"HEALTHY",ucH(d.u))}
+    ${cell("This week",""+d.al+" / "+d.cap+" hrs")}
+    ${cell("Forward load",""+d.fw+"%",ucH(d.fw))}
+    ${cellSm("Risk",d.risk)}
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
     <div>
-      <div class="dr-key" style="margin-bottom:8px">Active jobs in this department</div>
+      <div class="dr-sect">Work centres</div>
+      ${d.wcs.map(wc=>`
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--s3);border-radius:2px;margin-bottom:5px;font-size:10px">
+        <span style="font-family:var(--m);color:var(--gold)">${wc.n}</span>
+        <span style="font-family:var(--m);color:var(--t2)">${wc.hrs} hrs</span>
+        <span class="tag" style="background:${wc.status==="OVER"?"var(--ra)":wc.status==="WATCH"?"var(--aa)":"var(--ga)"};color:${wc.status==="OVER"?"var(--red)":wc.status==="WATCH"?"var(--amb)":"var(--grn)"}">${wc.status}</span>
+      </div>`).join("")}
+      <div style="margin-top:10px;font-size:9px;color:var(--t3);font-family:var(--m);line-height:1.6">${d.note}</div>
+    </div>
+    <div>
+      <div class="dr-sect">Active jobs &mdash; click to drill through</div>
       ${jobs.length?jobs.map(j=>`
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--s3);border-radius:2px;margin-bottom:6px;cursor:pointer;transition:background .1s" onclick="go(2);setTimeout(()=>cJ('${j.wo}'),80)" onmouseover="this.style.background='var(--s4)'" onmouseout="this.style.background='var(--s3)'">
-        <span class="bg ${rbg(j.r)}">${j.r}</span>
-        <span style="font-family:var(--m);font-size:9px;color:var(--gold)">${j.wo}</span>
-        <span style="font-size:10px;color:var(--t2)">${j.c}</span>
-        <span style="margin-left:auto;font-size:9px;font-family:var(--m);color:${ucH(j.pc)}">${j.pc}%</span>
-        ${vp(j.v)}
-      </div>`).join(""):`<div style="font-size:10px;color:var(--t3);font-family:var(--m)">No active jobs</div>`}
+      <div style="padding:8px 10px;background:var(--s3);border-radius:2px;margin-bottom:5px;cursor:pointer;transition:background .1s" onclick="go(2);setTimeout(()=>cJ('${j.wo}'),80)" onmouseover="this.style.background='var(--s4)'" onmouseout="this.style.background='var(--s3)'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="bg ${rbg(j.r)}">${j.r}</span>
+          <span style="font-family:var(--m);font-size:9px;color:var(--gold)">${j.wo}</span>
+          <span style="font-size:10px;color:var(--t1)">${j.c}</span>
+          ${vp(j.v)}<span style="margin-left:auto;font-family:var(--m);font-size:9px;color:var(--t3)">${j.dp}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">${pb(j.pc)}<span style="font-family:var(--m);font-size:8px;color:var(--t3)">${j.pc}%</span></div>
+      </div>`).join(""):`<div style="font-size:10px;color:var(--t3);font-family:var(--m);padding:8px 0">No active jobs in this department.</div>`}
+      <div style="margin-top:10px;font-size:9px;color:var(--amb);font-family:var(--m);line-height:1.6;padding:8px 10px;background:var(--aa);border-radius:2px;border-left:2px solid var(--amb)">${d.action}</div>
     </div>
-    <div>
-      <div class="dr-key" style="margin-bottom:8px">Work centres</div>
-      ${d.centres.map(c=>`<div style="font-size:10px;color:var(--t2);font-family:var(--m);padding:6px 0;border-bottom:1px solid var(--b1)">${c}</div>`).join("")}
-      <div style="margin-top:10px;font-size:10px;color:var(--t2);line-height:1.6;font-weight:300">${d.note}</div>
-    </div>
+  </div>
+  <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    ${cellSm("Trend analysis",d.trend)}
   </div>
 </div>`;
 }
-
 function a1(){
   const ctx=document.getElementById("c1");if(!ctx)return;
   const fd=fD();
@@ -550,36 +658,38 @@ function a1(){
     labels:fd.map(d=>d.s),
     datasets:[
       {label:"Util %",data:fd.map(d=>d.u),backgroundColor:fd.map(d=>ucH(d.u)+"22"),borderColor:fd.map(d=>ucH(d.u)),borderWidth:1,borderRadius:2},
-      {label:"85% threshold",data:fd.map(()=>85),type:"line",borderColor:"rgba(217,95,95,.3)",borderWidth:1,borderDash:[3,4],pointRadius:0,fill:false},
+      {label:"85% threshold",data:fd.map(()=>85),type:"line",borderColor:"rgba(192,48,58,.4)",borderWidth:1,borderDash:[3,4],pointRadius:0,fill:false},
     ]},
-    options:{...CXL,scales:{...CX.scales,y:{...CX.scales.y,min:0,max:110,ticks:{...CX.scales.y.ticks,callback:v=>v+"%"}}}}
+    options:{...CXL,scales:{...CX.scales,y:{...CX.scales.y,min:0,max:110,ticks:{...CX.scales.y.ticks,callback:v=>v+"%"}}},
+      onClick:(e,els)=>{if(!els.length)return;const d=fd[els[0].index];selDept=selDept===d.n?null:d.n;draw();}
+    }
   });
 }
 
-/* ━━ PAGE 2 — WORK ORDERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ══ PAGE 2 — WORK ORDERS ════════════════════════════════════ */
 function p2(){
   const fj=fJ();
   return`
 <div class="fb">
   <span class="fl">Filter</span>
   <select class="fs" onchange="rF=this.value;sJ=null;draw()">
-    <option value="All">Risk — All</option><option>Overdue</option><option>Critical</option><option>High Risk</option><option>Watch</option><option>On Track</option>
+    <option value="All">Risk &mdash; All</option><option>Overdue</option><option>Critical</option><option>High Risk</option><option>Watch</option><option>On Track</option>
   </select>
   <select class="fs" onchange="dF=this.value;sJ=null;draw()">
-    <option value="All">Department — All</option>${DEPTS.map(d=>`<option>${d.n}</option>`).join("")}
+    <option value="All">Department &mdash; All</option>${DEPTS.map(d=>`<option>${d.n}</option>`).join("")}
   </select>
-  <select class="fs"><option>Priority — All</option><option>High</option><option>Medium</option><option>Low</option></select>
-  <span class="fc">${fj.length} / ${JOBS.length} &nbsp;·&nbsp; click any row for full detail</span>
+  <select class="fs"><option>Priority &mdash; All</option><option>High</option><option>Medium</option><option>Low</option></select>
+  <span class="fc">${fj.length} / ${JOBS.length} &nbsp;&middot;&nbsp; click any row for full detail</span>
 </div>
 <div class="g5">${[
     {v:JOBS.length,l:"Total",c:"b"},{v:JOBS.filter(j=>j.r==="Overdue").length,l:"Overdue",c:"r"},
     {v:JOBS.filter(j=>j.r==="Critical").length,l:"Critical",c:"r"},{v:JOBS.filter(j=>j.v<0).length,l:"Behind",c:"a"},
     {v:JOBS.filter(j=>j.v>=0).length,l:"On track",c:"g"},
-  ].map(m=>`<div class="mc"><div class="mc-v ${m.c} fl">${m.v}</div><div class="mc-l">${m.l}</div></div>`).join("")}
+  ].map(m=>`<div class="mc"><div class="mc-v ${m.c} ani">${m.v}</div><div class="mc-l">${m.l}</div></div>`).join("")}
 </div>
 <div class="tw">
   <table>
-    <thead><tr><th>Work Order</th><th>Customer</th><th>Risk</th><th>Priority</th><th>Due</th><th>Days</th><th style="min-width:110px">Completion</th><th>Velocity</th><th>Dept</th></tr></thead>
+    <thead><tr><th>Work Order</th><th>Customer</th><th>Risk</th><th>Priority</th><th>Due</th><th>Days</th><th style="min-width:110px">Completion</th><th>Velocity</th><th>Dept</th><th>Work Centre</th></tr></thead>
     <tbody>${fj.length?fj.map(j=>`
       <tr class="${sJ===j.wo?"on":""}" onclick="cJ('${j.wo}')">
         <td style="font-family:var(--m);font-size:9px;color:var(--gold)">${j.wo}</td>
@@ -591,54 +701,87 @@ function p2(){
         <td><div style="display:flex;align-items:center;gap:8px">${pb(j.pc)}<span style="font-family:var(--m);font-size:8px;color:var(--t3)">${j.pc}%</span></div></td>
         <td>${vp(j.v)}</td>
         <td style="font-size:9px;color:var(--t3)">${j.dp}</td>
-      </tr>`).join(""):`<tr><td colspan="9" style="text-align:center;color:var(--t3);padding:28px;font-size:9px;font-family:var(--m)">No results match current filters</td></tr>`}
+        <td style="font-size:9px;color:var(--t3);font-family:var(--m)">${j.wc||"&mdash;"}</td>
+      </tr>`).join("")
+    :`<tr><td colspan="10" style="text-align:center;color:var(--t3);padding:28px;font-size:9px;font-family:var(--m)">No results match current filters</td></tr>`}
     </tbody>
   </table>
-</div>${sJ?bD():""}`;
+</div>
+${sJ?bD():""}`;
 }
 function bD(){
   const j=JOBS.find(x=>x.wo===sJ);if(!j)return"";
-  const pc=j.pc>=75?"#4d9e72":j.pc>=45?"#c4861e":"#d95f5f";
-  const acts=jobActions[j.wo]||[];
+  const pc=j.pc>=75?"#1e7a4a":j.pc>=45?"#a06010":"#c0303a";
+  const acts=jobActs[j.wo]||[];
+  // projected completion
+  const daysLeft=j.dy;
+  const expectedPc=Math.min(100,j.pc-j.v);
+  const projectedDays=daysLeft+(j.v<0?Math.ceil((100-j.pc)/Math.max(1,-j.v)):0);
+  const projectedDate=j.dy<0?`${Math.abs(j.dy)} days OVERDUE`:`Due in ${j.dy}d — projected ${projectedDays<0?Math.abs(projectedDays)+" days late":"on time"}`;
   return`<div class="drill">
   <div class="dr-hd">
-    <div><div class="dr-ttl">${j.wo} &mdash; ${j.c}</div><div class="dr-sub">${j.dp} · Due ${j.d} · ${j.dy<0?"OVERDUE "+Math.abs(j.dy)+" days":"+"+j.dy+" days remaining"}</div></div>
-    <button class="dr-close" onclick="sJ=null;draw()">✕</button>
+    <div>
+      <div class="dr-ttl">${j.wo} &nbsp;&mdash;&nbsp; ${j.c}</div>
+      <div class="dr-sub">${j.dp} &nbsp;&middot;&nbsp; ${j.wc||"&mdash;"} &nbsp;&middot;&nbsp; Due ${j.d} &nbsp;&middot;&nbsp; ${j.dy<0?"OVERDUE "+Math.abs(j.dy)+" days":"+"+j.dy+" days remaining"}</div>
+    </div>
+    <button class="dr-close" onclick="sJ=null;draw()">&#10005;</button>
   </div>
   <div class="dr-body">
     <div class="dr-meta">${j.info}</div>
-    <div class="dr-grid">
-      <div class="dr-cell"><div class="dr-key">Risk</div><div class="dr-val" style="color:${j.r==="Overdue"||j.r==="Critical"?"var(--red)":"var(--t0)"}">${j.r}</div></div>
-      <div class="dr-cell"><div class="dr-key">Days left</div><div class="dr-val" style="color:${j.dy<0?"var(--red)":"var(--t0)"}">${j.dy<0?j.dy:"+"+j.dy}</div></div>
-      <div class="dr-cell"><div class="dr-key">Completion</div><div class="dr-val" style="color:${pc}">${j.pc}%</div></div>
-      <div class="dr-cell"><div class="dr-key">Velocity</div><div class="dr-val" style="color:${j.v<0?"var(--red)":"var(--grn)"}">${j.v>0?"+":""}${j.v}%</div></div>
+    <div style="font-size:9px;color:var(--t3);font-family:var(--m);padding:6px 10px;background:var(--s2);border-radius:2px;border-left:2px solid var(--b2)">${j.status}</div>
+    <div class="dr-4">
+      ${cell("Risk",j.r,j.r==="Overdue"||j.r==="Critical"?"var(--red)":j.r==="High Risk"?"var(--amb)":j.r==="Watch"?"var(--blu)":"var(--grn)")}
+      ${cell("Days left",j.dy<0?String(j.dy):"+"+j.dy,j.dy<0?"var(--red)":j.dy<=3?"var(--amb)":"var(--t0)")}
+      ${cell("Completion",j.pc+"%",pc)}
+      ${cell("Velocity",(j.v>0?"+":"")+j.v+"%",j.v<0?"var(--red)":"var(--grn)")}
+    </div>
+    <div class="dr-4">
+      ${cellSm("Priority",j.p)}
+      ${cellSm("Work centre",j.wc||"&mdash;")}
+      ${cellSm("Hours remaining",j.hrs_remaining?j.hrs_remaining+" hrs":"&mdash;")}
+      ${cellSm("Hours planned",j.hrs_planned?j.hrs_planned+" hrs":"&mdash;")}
     </div>
     <div>
-      <div class="dr-sect">Completion trend — last 10 checkpoints</div>
-      <div style="display:flex;gap:3px;align-items:flex-end;height:40px;margin-bottom:10px">
-        ${j.history.map((v,i)=>{const expected=(i+1)*(100/j.history.length);const c=v>=expected?"#4d9e72":v>=expected-10?"#c4861e":"#d95f5f";return`<div style="flex:1;height:${Math.round(v/100*40)}px;background:${c};border-radius:1px 1px 0 0;min-width:0"></div>`}).join("")}
+      <div class="dr-sect">Completion trend &mdash; last 10 checkpoints vs expected pace</div>
+      <div style="display:flex;gap:3px;align-items:flex-end;height:48px;margin-bottom:6px">
+        ${j.history.map((v,i)=>{
+          const exp=(i+1)*(100/j.history.length);
+          const c=v>=exp?"#1e7a4a":v>=exp-10?"#a06010":"#c0303a";
+          const h=Math.round(v/100*48);
+          return`<div style="flex:1;height:${h}px;background:${c};border-radius:1px 1px 0 0;min-width:0;position:relative" title="Checkpoint ${i+1}: ${v}% (expected ${Math.round(exp)}%)"></div>`;
+        }).join("")}
       </div>
-      <div class="dr-sect">Completion progress</div>
-      <div class="dr-pout"><div class="dr-pin" style="width:${j.pc}%;background:${pc}"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:8px;color:var(--t3);font-family:var(--m)">
+        <span>Start</span><span>Checkpoint 5</span><span>Now</span>
+      </div>
     </div>
     <div>
-      <div class="dr-sect">Root cause</div>
+      <div class="dr-sect">Completion progress &mdash; ${j.pc}%</div>
+      <div class="dr-pout"><div class="dr-pin" style="width:${j.pc}%;background:${pc}"></div></div>
+      <div style="margin-top:6px;font-size:9px;color:var(--t3);font-family:var(--m)">${projectedDate}</div>
+    </div>
+    <div>
+      <div class="dr-sect">Root cause analysis</div>
       <div style="font-size:11px;color:var(--t2);font-weight:300;line-height:1.7;padding:10px 12px;background:var(--s2);border-radius:2px;border:1px solid var(--b1)">${j.root}</div>
     </div>
     <div>
-      <div class="dr-sect" style="margin-bottom:8px">Recommended actions — click to mark complete</div>
+      <div class="dr-sect">Customer risk assessment</div>
+      <div style="font-size:10px;color:var(--t2);font-weight:300;line-height:1.6;padding:9px 11px;background:var(--s2);border-radius:2px;border-left:2px solid ${j.customer_risk.startsWith("HIGH")?"var(--red)":j.customer_risk.startsWith("MEDIUM")?"var(--amb)":"var(--grn)"}">${j.customer_risk}</div>
+    </div>
+    <div>
+      <div class="dr-sect" style="margin-bottom:8px">Recommended actions &mdash; click to mark complete</div>
       ${j.actions.map((a,i)=>`
       <div class="chk-action" onclick="toggleJA('${j.wo}',${i})">
-        <div class="chk-box${acts[i]?" done":""}">${acts[i]?"✓":""}</div>
-        <div class="chk-text${acts[i]?" done":""}">${a}</div>
+        <div class="chk-box${acts[i]?" done":""}" id="ja_${j.wo}_${i}">${acts[i]?"&#10003;":""}</div>
+        <div class="chk-text${acts[i]?" done":""}" id="jt_${j.wo}_${i}">${a}</div>
       </div>`).join("")}
     </div>
     <div>
       <div class="dr-sect">Velocity analysis</div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         ${vp(j.v)}
-        <span style="font-size:10px;color:${j.v<=-20?"var(--red)":j.v<0?"var(--amb)":"var(--grn)"};font-family:var(--m)">
-          ${j.v<=-20?"Accelerating toward failure — immediate intervention required":j.v<=-10?"Significant negative velocity — action needed this week":j.v<0?"Slightly behind — monitor closely":"On target"}
+        <span style="font-size:10px;color:${j.v<=-20?"var(--red)":j.v<=-10?"var(--amb)":j.v<0?"#a06010":"var(--grn)"};font-family:var(--m)">
+          ${j.v<=-20?"Accelerating toward failure &mdash; immediate intervention required":j.v<=-10?"Significant negative velocity &mdash; action needed this week":j.v<0?"Slightly behind &mdash; monitor closely":"On target or ahead"}
         </span>
       </div>
     </div>
@@ -646,156 +789,202 @@ function bD(){
 </div>`;
 }
 function toggleJA(wo,i){
-  if(!jobActions[wo])jobActions[wo]=Array(JOBS.find(j=>j.wo===wo).actions.length).fill(false);
-  jobActions[wo][i]=!jobActions[wo][i];
-  // Re-render just the drill without full draw
-  document.getElementById("cv").innerHTML=p2();
-  setTimeout(()=>a2(),30);
+  if(!jobActs[wo])jobActs[wo]=[];
+  jobActs[wo][i]=!jobActs[wo][i];
+  const b=document.getElementById("ja_"+wo+"_"+i),t=document.getElementById("jt_"+wo+"_"+i);
+  if(b){b.innerHTML=jobActs[wo][i]?"&#10003;":"";b.className="chk-box"+(jobActs[wo][i]?" done":"");}
+  if(t){t.className="chk-text"+(jobActs[wo][i]?" done":"");}
 }
-function a2(){}
 
-/* ━━ PAGE 3 — RESOURCES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ══ PAGE 3 — RESOURCES ══════════════════════════════════════ */
 function p3(){
   const fs=fS(),fd=fD();
   return`
 <div class="fb">
   <span class="fl">Filter</span>
-  <select class="fs" onchange="rDF=this.value;selStaff=null;draw()"><option value="All">Department — All</option>${DEPTS.map(d=>`<option value="${d.n}">${d.n}</option>`).join("")}</select>
-  <select class="fs" onchange="rRF=this.value;selStaff=null;draw()"><option value="All">Role — All</option><option value="Welder Sr">Welder Sr</option><option value="Assembler Sr">Assembler Sr</option><option value="Engineer Sr">Engineer Sr</option><option value="Buyer Sr">Buyer Sr</option></select>
-  <span class="fc">${fs.filter(s=>!s.ab).length} present · ${fs.filter(s=>s.ab).length} absent · click a person for detail</span>
+  <select class="fs" onchange="rDF=this.value;selStaff=null;draw()"><option value="All">Department &mdash; All</option>${DEPTS.map(d=>`<option value="${d.n}">${d.n}</option>`).join("")}</select>
+  <select class="fs" onchange="rRF=this.value;selStaff=null;draw()"><option value="All">Role &mdash; All</option><option value="Welder Sr">Welder Sr</option><option value="Assembler Sr">Assembler Sr</option><option value="Engineer Sr">Engineer Sr</option><option value="Buyer Sr">Buyer Sr</option></select>
+  <span class="fc">${fs.filter(s=>!s.ab).length} present &nbsp;&middot;&nbsp; ${fs.filter(s=>s.ab).length} absent &nbsp;&middot;&nbsp; click a name for full profile</span>
 </div>
-<div class="g4">${[
-    {v:"520",l:"Available",h:"hours this week",c:"g"},{v:"507",l:"Booked",h:"allocated to jobs",c:"a"},
-    {v:"13",l:"Free",h:"remaining capacity",c:"b"},{v:"40",l:"Lost",h:"Lars Meijer · absent",c:"r"},
-  ].map(m=>`<div class="mc"><div class="mc-v ${m.c}">${m.v}</div><div class="mc-l">${m.l}</div><div class="mc-s">${m.h}</div></div>`).join("")}
+<div class="g4">
+  ${[{v:"520",l:"Available hrs",h:"this week",c:"g"},{v:"507",l:"Booked hrs",h:"allocated to jobs",c:"a"},
+     {v:"13",l:"Free hrs",h:"remaining capacity",c:"b"},{v:"40",l:"Lost to absence",h:"Lars Meijer &middot; Welding",c:"r"}]
+    .map(m=>`<div class="mc"><div class="mc-v ${m.c}">${m.v}</div><div class="mc-l">${m.l}</div><div class="mc-s">${m.h}</div></div>`).join("")}
 </div>
 <div class="g2">
   <div class="cc">
-    <div class="ct">Team availability — click any person for detail</div>
+    <div class="ct">Team availability &mdash; click any person for full profile</div>
     ${fs.map(s=>`
     <div class="staff-row${selStaff===s.n?" on":""}" onclick="selStaff=selStaff==='${s.n}'?null:'${s.n}';draw()">
       <div class="staff-av" style="background:${s.ab?"var(--ra)":"var(--ga)"};color:${s.ab?"var(--red)":"var(--grn)"}">
-        ${s.ab?"⊘":s.av}
+        ${s.ab?"&#8856;":s.av}
       </div>
-      <div style="flex:1">
+      <div style="flex:1;min-width:0">
         <div style="font-size:11px;font-weight:400;color:${s.ab?"var(--red)":"var(--t1)"}">${s.n}</div>
-        <div style="font-size:9px;color:var(--t3);font-family:var(--m)">${s.dp} · ${s.ro}</div>
+        <div style="font-size:9px;color:var(--t3);font-family:var(--m)">${s.dp} &nbsp;&middot;&nbsp; ${s.ro}</div>
       </div>
-      <div style="font-size:9px;color:var(--t3);font-family:var(--m)">${s.jobs.length?s.jobs.length+" job"+(s.jobs.length!==1?"s":""):"—"}</div>
+      <div style="font-size:9px;color:var(--t3);font-family:var(--m);flex-shrink:0">${s.jobs.length?s.jobs.length+" job"+(s.jobs.length!==1?"s":""):"&mdash;"}</div>
+      <div style="font-family:var(--m);font-size:10px;font-weight:500;color:${s.av===0?"var(--red)":"var(--grn)"};min-width:36px;text-align:right">${s.av}h</div>
     </div>`).join("")}
   </div>
   <div>
-    ${selStaff?staffDetail():`<div class="cc" style="height:100%;display:flex;align-items:center;justify-content:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">Select a team member to view details</span></div>`}
+    ${selStaff?staffXpand():`<div class="cc" style="height:100%;display:flex;align-items:center;justify-content:center"><span style="font-size:10px;color:var(--t3);font-family:var(--m)">Select a team member to view full profile</span></div>`}
   </div>
 </div>
 <div class="g2">
-  <div class="al re"><div class="al-bar" style="background:var(--red)"></div>Lars Meijer absent — 40 hrs lost · Welding at 92% · Priority review: WO-2026-0007, WO-2026-0018</div>
-  <div class="al gr"><div class="al-bar" style="background:var(--grn)"></div>Reallocation: Assembly +57 hrs · Engineering +56 hrs · Consider temporary reassignment to Welding</div>
+  <div class="al re"><div class="al-bar" style="background:var(--red)"></div>Lars Meijer absent &mdash; 40 hrs lost &nbsp;&middot;&nbsp; Welding at 92% &nbsp;&middot;&nbsp; Review: WO-2026-0007, WO-2026-0018</div>
+  <div class="al gr"><div class="al-bar" style="background:var(--grn)"></div>Reallocation: Assembly +57 hrs (Kevin Smit) &nbsp;&middot;&nbsp; Engineering +56 hrs (Dirk van Dijk)</div>
 </div>`;
 }
-function staffDetail(){
+function staffXpand(){
   const s=STAFF.find(x=>x.n===selStaff);if(!s)return"";
   const jobs=JOBS.filter(j=>s.jobs.includes(j.wo));
-  return`<div class="dept-detail" style="height:100%">
-  <div class="dr-grid" style="margin-bottom:12px">
-    <div class="dr-cell"><div class="dr-key">Status</div><div class="dr-val" style="color:${s.ab?"var(--red)":"var(--grn)"}">${s.ab?"ABSENT":"PRESENT"}</div></div>
-    <div class="dr-cell"><div class="dr-key">Available hrs</div><div class="dr-val" style="color:${s.av===0?"var(--red)":"var(--grn)"}">${s.av} hrs</div></div>
-    <div class="dr-cell"><div class="dr-key">Department</div><div class="dr-val" style="font-size:12px">${s.dp}</div></div>
-    <div class="dr-cell"><div class="dr-key">Active jobs</div><div class="dr-val">${s.jobs.length||"—"}</div></div>
+  return`<div class="xpand" style="height:100%">
+  <div class="dr-4" style="margin-bottom:12px">
+    ${cell("Status",s.ab?"ABSENT":"PRESENT",s.ab?"var(--red)":"var(--grn)")}
+    ${cell("Available",s.av+" hrs",s.av===0?"var(--red)":"var(--grn)")}
+    ${cellSm("Department",s.dp)}
+    ${cellSm("Experience",s.exp)}
   </div>
   <div style="margin-bottom:12px">
-    <div class="dr-key" style="margin-bottom:5px">Skills & experience</div>
-    <div style="font-size:10px;color:var(--t2);font-weight:300;line-height:1.6">${s.skill}</div>
+    <div class="dr-key" style="margin-bottom:5px">Skills &amp; certification</div>
+    <div style="font-size:10px;color:var(--t2);font-weight:300;line-height:1.6">${s.cert}</div>
+  </div>
+  <div style="margin-bottom:12px">
+    <div class="dr-key" style="margin-bottom:5px">This week</div>
+    <div style="font-size:10px;color:var(--t2);font-weight:300;line-height:1.6">${s.week}</div>
+  </div>
+  <div style="margin-bottom:12px">
+    <div class="dr-key" style="margin-bottom:5px">Risk &amp; notes</div>
+    <div style="font-size:10px;color:var(--t2);font-weight:300;line-height:1.6;padding:8px 10px;background:var(--s3);border-radius:2px;border-left:2px solid ${s.risk.startsWith("ABSENT")?"var(--red)":s.risk.startsWith("SPLIT")?"var(--amb)":s.risk.startsWith("SINGLE")?"var(--amb)":"var(--b2)"}">${s.risk}</div>
+    <div style="margin-top:6px;font-size:10px;color:var(--t3);font-weight:300;line-height:1.6">${s.note}</div>
   </div>
   ${jobs.length?`<div>
-    <div class="dr-key" style="margin-bottom:7px">Assigned jobs</div>
+    <div class="dr-key" style="margin-bottom:7px">Assigned jobs &mdash; click to drill through</div>
     ${jobs.map(j=>`
     <div style="padding:8px 10px;background:var(--s3);border-radius:2px;margin-bottom:5px;cursor:pointer;transition:background .1s" onclick="go(2);setTimeout(()=>cJ('${j.wo}'),80)" onmouseover="this.style.background='var(--s4)'" onmouseout="this.style.background='var(--s3)'">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
         <span class="bg ${rbg(j.r)}">${j.r}</span>
         <span style="font-family:var(--m);font-size:9px;color:var(--gold)">${j.wo}</span>
         <span style="font-size:10px;color:var(--t1)">${j.c}</span>
-        <span style="margin-left:auto;font-family:var(--m);font-size:9px;color:${j.v<0?"var(--red)":"var(--grn)"}">${j.v>0?"+":""}${j.v}%</span>
+        ${vp(j.v)}<span style="margin-left:auto;font-size:8px;color:var(--t3);font-family:var(--m)">Due ${j.d}</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">${pb(j.pc)}<span style="font-family:var(--m);font-size:8px;color:var(--t3)">${j.pc}%</span></div>
     </div>`).join("")}
-  </div>`:`<div style="font-size:10px;color:var(--t3);font-family:var(--m)">${s.ab?"Currently absent — return expected Monday.":"No active jobs assigned."}</div>`}
+  </div>`:`<div style="font-size:10px;color:var(--t3);font-family:var(--m)">${s.ab?"Currently absent.":"No active jobs assigned."}</div>`}
 </div>`;
 }
 function a3(){}
 
-/* ━━ PAGE 4 — SIGNALS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ══ PAGE 4 — SIGNALS ════════════════════════════════════════ */
 const SIGS=[
-  {id:"s0",col:"red",title:"WO-2026-0007 — Van der Berg",short:"Overdue 21 days · 45% done · velocity −32%",
-   detail:"Steel tank fabrication is accelerating toward failure. At current velocity, projected completion is 31 May — 19 days late. Customer has been informed once but expects an update within 48 hours. Action: reassign both WLD-01 welders, resolve material delivery block immediately."},
-  {id:"s1",col:"red",title:"WO-2026-0018 — Dijkstra Tech",short:"Overdue 16 days · engineering sign-off pending",
-   detail:"Frame structure halted pending customer engineering sign-off on modified spec. Dijkstra Tech PM confirmed no further scope changes but sign-off delayed. Risk: every day without sign-off pushes delivery further. Action: chase Dijkstra PM today for written confirmation."},
-  {id:"s2",col:"red",title:"Welding dept at 92% utilisation",short:"No capacity for new jobs · Lars Meijer absent",
-   detail:"Welding is the only department that cannot absorb additional work. With Lars Meijer absent, 40 hours are unrecoverable this week. Forward load projects 88% for the next 2 weeks. Any new welding job accepted now will extend existing delays. Recommend: hold new welding commitments until load drops below 80%."},
-  {id:"s3",col:"amber",title:"WO-2026-0031 — Hoogenbosch",short:"Critical · 2 days to deadline · velocity −8%",
-   detail:"Conveyor integration at 78% with 2 days remaining. Velocity is declining — Zone 3 cable reroute adding 6 unplanned hours. If not resolved today, delivery will slip by 1–2 days. Action: pull Kevin Smit to assist. Assembly has 57 free hours this week."},
-  {id:"s4",col:"amber",title:"OTD trending below 90% target",short:"W5 at 79% · declining for 5 consecutive weeks",
-   detail:"On-time delivery has been declining for 5 consecutive weeks, from 94% (W1) to 79% (W5). The trend is not improving. Root cause: accumulation of overdue Welding jobs and at-risk Assembly work. If current jobs are not resolved, OTD may fall below 75% by W8."},
+  {id:"s0",col:"red",title:"WO-2026-0007 — Van der Berg overdue 21 days",
+   short:"45% complete &nbsp;&middot;&nbsp; velocity &minus;32% &nbsp;&middot;&nbsp; Welding bottleneck",
+   detail:"At &minus;32% velocity, this job is accelerating toward failure. Projected completion: 31 May (19 days late). Van der Berg is a repeat customer with 2 other active orders. Delayed delivery risks the relationship and a €280k follow-on contract. Every day of further slip increases penalty exposure.",
+   actions:["Reassign both WLD-01 welders immediately","Resolve Rijnmond Steel material delivery today","Call Van der Berg — commit to 31 May delivery","Authorise weekend overtime"]},
+  {id:"s1",col:"red",title:"WO-2026-0018 — Dijkstra Tech overdue 16 days",
+   short:"62% complete &nbsp;&middot;&nbsp; velocity &minus;18% &nbsp;&middot;&nbsp; sign-off received",
+   detail:"Frame structure halted for 5 days due to spec change. Sign-off now confirmed. Pieter Bakker is currently split with WO-0044 — he needs to be assigned exclusively to this job. At current pace, projected delivery is 28 May if Bakker is re-dedicated from tomorrow.",
+   actions:["Assign Pieter Bakker exclusively to WO-0018 from tomorrow","Resume full fabrication — all sections now signed off","Weekly update call with Dijkstra Tech PM"]},
+  {id:"s2",col:"red",title:"Welding at 92% utilisation — bottleneck confirmed",
+   short:"Lars Meijer absent &nbsp;&middot;&nbsp; 3 at-risk jobs &nbsp;&middot;&nbsp; no new capacity",
+   detail:"Welding is the single constraint blocking recovery. WC-WLD-01 is running at 195/160 hours — already over capacity. With Lars Meijer absent, no buffer exists. Any new welding job accepted this week directly delays WO-0007 and WO-0018. Forward load of 88% means the problem continues into next week.",
+   actions:["Hold all new welding job acceptances this week","Lars Meijer return (Monday): immediately assign to WO-0044","Investigate overtime options for WC-WLD-01"]},
+  {id:"s3",col:"amber",title:"WO-2026-0031 — Hoogenbosch critical, 2 days",
+   short:"78% complete &nbsp;&middot;&nbsp; velocity &minus;8% &nbsp;&middot;&nbsp; Zone 3 blocker",
+   detail:"Conveyor integration is 78% complete with exactly 2 days to deadline. Zone 3 cable rerouting adds 6 unplanned hours. Stefan Visser working alone cannot complete this in time. Kevin Smit from WO-0062 (ahead of schedule, low risk) can resolve Zone 3 in 1 day. Without action today, Hoogenbosch delivery slips — their first order with this company.",
+   actions:["Pull Kevin Smit to Zone 3 — today","Authorise 3 hours overtime for assembly tonight","Confirm Hoogenbosch acceptance test for 04 Jun"]},
+  {id:"s4",col:"amber",title:"OTD trending below 90% for 5 consecutive weeks",
+   short:"W6 low at 79% &nbsp;&middot;&nbsp; root cause: Welding backlog",
+   detail:"On-time delivery has declined from 94% (W1) to 79% (W6) — a 15-point drop. The root cause is the accumulation of Welding delays. Recovery to 90% depends on resolving WO-0007 and WO-0018. If current actions are taken, projected W8 OTD: ~87%. Sustained improvement requires the Welding bottleneck to be resolved permanently — not just this week.",
+   actions:["Resolve WO-0007 and WO-0018 first — they drive OTD","Review Welding capacity structurally after this crisis","Consider hiring or cross-training to prevent recurrence"]},
 ];
 function p4(){
   const ov=JOBS.filter(j=>j.r==="Overdue").length,cr=JOBS.filter(j=>j.r==="Critical").length;
   return`
 <div class="sig-hd">
-  <div class="sig-title">Reprioritisation Signal — Action Required Today</div>
-  <div class="sig-body">${ov} jobs overdue · ${cr} critical · Welding 92% · 1 staff absent in bottleneck dept · OTD trending below 90%</div>
+  <div class="sig-title">Reprioritisation Signal &mdash; Action Required Today</div>
+  <div class="sig-body">${ov} jobs overdue &nbsp;&middot;&nbsp; ${cr} critical &nbsp;&middot;&nbsp; Welding 92% &nbsp;&middot;&nbsp; 1 staff absent in bottleneck dept &nbsp;&middot;&nbsp; OTD trending below 90%</div>
 </div>
 <div class="g3">
   <div class="sig-col">
-    <div class="sig-col-hd" style="border-bottom-color:var(--red)"><div class="sig-dot" style="background:var(--red)"></div><span class="sig-col-t" style="color:var(--red)">Critical — Act today</span></div>
+    <div class="sig-col-hd" style="border-bottom-color:var(--red)"><div class="sig-dot" style="background:var(--red)"></div><span class="sig-col-t" style="color:var(--red)">Critical &mdash; Act today</span></div>
     ${SIGS.filter(s=>s.col==="red").map(s=>`
     <div class="sig-item${selSig===s.id?" on":""}" onclick="selSig=selSig==='${s.id}'?null:'${s.id}';draw()">
       <div class="sig-item-title">${s.title}</div>
-      <div style="font-size:9px;color:var(--t3);font-family:var(--m)">${s.short}</div>
-      <div class="sig-item-detail">${s.detail}</div>
+      <div style="font-size:9px;color:var(--t3);font-family:var(--m);margin-top:2px">${s.short}</div>
+      <div class="sig-detail">${s.detail}
+        <div class="sig-actions">
+          ${s.actions.map((a,i)=>`<div class="sig-action"><span style="color:var(--gold);font-family:var(--m)">${i+1}.</span>${a}</div>`).join("")}
+        </div>
+      </div>
     </div>`).join("")}
   </div>
   <div class="sig-col">
-    <div class="sig-col-hd" style="border-bottom-color:var(--amb)"><div class="sig-dot" style="background:var(--amb)"></div><span class="sig-col-t" style="color:var(--amb)">Watch — This week</span></div>
+    <div class="sig-col-hd" style="border-bottom-color:var(--amb)"><div class="sig-dot" style="background:var(--amb)"></div><span class="sig-col-t" style="color:var(--amb)">Watch &mdash; This week</span></div>
     ${SIGS.filter(s=>s.col==="amber").map(s=>`
     <div class="sig-item${selSig===s.id?" on":""}" onclick="selSig=selSig==='${s.id}'?null:'${s.id}';draw()">
       <div class="sig-item-title">${s.title}</div>
-      <div style="font-size:9px;color:var(--t3);font-family:var(--m)">${s.short}</div>
-      <div class="sig-item-detail">${s.detail}</div>
+      <div style="font-size:9px;color:var(--t3);font-family:var(--m);margin-top:2px">${s.short}</div>
+      <div class="sig-detail">${s.detail}
+        <div class="sig-actions">
+          ${s.actions.map((a,i)=>`<div class="sig-action"><span style="color:var(--gold);font-family:var(--m)">${i+1}.</span>${a}</div>`).join("")}
+        </div>
+      </div>
     </div>`).join("")}
-    <div class="sig-item${selSig==="so"?" on":""}" onclick="selSig=selSig==='so'?null:'so';draw()">
-      <div class="sig-item-title">WO-2026-0044 — Bakker & Zn.</div>
-      <div style="font-size:9px;color:var(--t3);font-family:var(--m)">High Risk · velocity −22% · projected 4 days late</div>
-      <div class="sig-item-detail">Pipe assembly at 55% with 6 days remaining. Velocity at −22% projects completion on 12 Jun — 4 days late. Upstream engineering spec confirmed. Action: assign Pieter Bakker full-time from tomorrow. Consider 10h overtime to close gap.</div>
-    </div>
   </div>
   <div class="sig-col">
-    <div class="sig-col-hd" style="border-bottom-color:var(--grn)"><div class="sig-dot" style="background:var(--grn)"></div><span class="sig-col-t" style="color:var(--grn)">Opportunity — Reallocate</span></div>
-    ${["Assembly: 57 free hrs · Kevin Smit available for Welding support","Engineering: 56 free hrs · Dirk van Dijk available after Zone 3 fix","QC: 39 free hrs · no immediate demand","Consider cross-training Kevin Smit on basic MIG welding"].map((t,i)=>`
-    <div class="sig-item"><div class="sig-item-title">${t.split(":")[0]}</div><div style="font-size:9px;color:var(--t3)">${t.split(":").slice(1).join(":")}</div></div>`).join("")}
+    <div class="sig-col-hd" style="border-bottom-color:var(--grn)"><div class="sig-dot" style="background:var(--grn)"></div><span class="sig-col-t" style="color:var(--grn)">Opportunity</span></div>
+    ${[{t:"Kevin Smit (Assembly)",s:"40 hrs free &middot; WO-0062 ahead of schedule",d:"Best reallocation candidate this week. WO-0062 can absorb his 1-2 day absence without risk. Reallocating Kevin to WO-0031 Zone 3 resolves the Hoogenbosch critical delivery today."},
+       {t:"Assembly dept — 57 free hrs",s:"WC-ASM-02 slightly over but recoverable",d:"57 hours available across Assembly this week. Can absorb temporary Welding overflow for jobs that do not require specialist welding certification."},
+       {t:"Engineering — 56 free hrs",s:"Dirk van Dijk fully available",d:"Engineering is at 65% utilisation. Dirk van Dijk is available for cross-functional support on documentation or engineering queries that are blocking Welding jobs."},
+       {t:"QC sign-off on WO-0044",s:"First weld section awaiting approval",d:"QC sign-off today unblocks the entire WO-0044 assembly phase. Currently the only thing preventing restart of production on this job."},
+    ].map((item,i)=>`
+    <div class="sig-item${selSig==="opp"+i?" on":""}" onclick="selSig=selSig==='opp${i}'?null:'opp${i}';draw()">
+      <div class="sig-item-title">${item.t}</div>
+      <div style="font-size:9px;color:var(--t3);font-family:var(--m);margin-top:2px">${item.s}</div>
+      <div class="sig-detail">${item.d}</div>
+    </div>`).join("")}
   </div>
 </div>
-<div class="cc">
-  <div class="ct">Management checklist — click to action</div>
-  ${["Reassign welders to WO-2026-0007 — today","Chase Dijkstra Tech engineering sign-off — today","Pull Kevin Smit to support WO-2026-0031 Zone 3 rework","Confirm overtime for Welding dept this week","Call Van der Berg with revised delivery estimate"].map((t,i)=>`
-  <div class="chk-action" onclick="toggleChk(${i})">
-    <div class="chk-box${chks[i]?" done":""}" id="cb${i}">${chks[i]?"✓":""}</div>
-    <div class="chk-text${chks[i]?" done":""}" id="ct${i}">${t}</div>
-  </div>`).join("")}
-</div>
-<div class="cc">
-  <div class="ct">Signal auto-triggers when any of these thresholds are crossed</div>
-  <div class="sig-trigger">overdue jobs exist &nbsp;·&nbsp; utilisation > 85% &nbsp;·&nbsp; velocity < −10% &nbsp;·&nbsp; staff absent in bottleneck dept &nbsp;·&nbsp; OTD < 90% &nbsp;·&nbsp; forward load > 85%</div>
+<div class="g2">
+  <div class="cc">
+    <div class="ct">Management checklist &mdash; click to action</div>
+    ${["Reassign welders to WO-2026-0007 — today","Chase Dijkstra Tech engineering sign-off — today","Pull Kevin Smit to support WO-2026-0031 Zone 3","Confirm overtime for Welding dept this week","Call Van der Berg with revised delivery estimate"].map((t,i)=>`
+    <div class="chk-action" onclick="toggleChk(${i})">
+      <div class="chk-box${chks[i]?" done":""}" id="cb${i}">${chks[i]?"&#10003;":""}</div>
+      <div class="chk-text${chks[i]?" done":""}" id="ct${i}">${t}</div>
+    </div>`).join("")}
+  </div>
+  <div class="cc">
+    <div class="ct">Signal auto-triggers when thresholds crossed</div>
+    <div class="sig-trigger">overdue jobs exist &nbsp;&middot;&nbsp; utilisation > 85% &nbsp;&middot;&nbsp; velocity < &minus;10% &nbsp;&middot;&nbsp; staff absent in bottleneck dept &nbsp;&middot;&nbsp; OTD < 90% &nbsp;&middot;&nbsp; forward load > 85%</div>
+    <div style="margin-top:12px">
+      <div class="dr-sect" style="margin-bottom:8px">Projected recovery path</div>
+      ${[
+        {label:"Today",action:"Kevin Smit → WO-0031. Welders refocused on WO-0007.",outcome:"WO-0031 on track for 04 Jun"},
+        {label:"Tomorrow",action:"Pieter Bakker exclusive to WO-0018. QC signs off WO-0044.",outcome:"WO-0018 velocity recovers"},
+        {label:"This week",action:"WO-0007 overtime weekend. Rijnmond Steel delivery.",outcome:"WO-0007 projected 31 May"},
+        {label:"Monday",action:"Lars Meijer returns. Assign to WO-0044 full-time.",outcome:"WO-0044 back on track"},
+      ].map(r=>`
+      <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--b1);align-items:flex-start">
+        <span style="font-family:var(--m);font-size:9px;color:var(--gold);min-width:60px;flex-shrink:0">${r.label}</span>
+        <span style="font-size:10px;color:var(--t2);font-weight:300;flex:1">${r.action}</span>
+        <span style="font-size:9px;color:var(--grn);font-family:var(--m);min-width:120px;text-align:right">${r.outcome}</span>
+      </div>`).join("")}
+    </div>
+  </div>
 </div>`;
 }
 
-/* ━━ CONTROLLERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ══ CONTROLLERS ══════════════════════════════════════════════ */
 const R=[p0,p1,p2,p3,p4];
-const A=[a0,a1,a2,a3,()=>{}];
+const A=[a0,a1,()=>{},a3,()=>{}];
 
 function draw(){dC();document.getElementById("cv").innerHTML=R[pg]();setTimeout(()=>A[pg](),60)}
 function go(i){
   pg=i;rF="All";dF="All";sJ=null;aC=null;cDF="All";rDF="All";rRF="All";
-  selDept=null;selSig=null;
+  selDept=null;selStaff=null;selSig=null;selOTD=null;selRiskRow=null;
   [0,1,2,3,4].forEach(n=>document.getElementById("t"+n).classList.toggle("on",n===i));
   draw();
 }
@@ -808,10 +997,9 @@ function cJ(wo){
 function toggleChk(i){
   chks[i]=!chks[i];
   const b=document.getElementById("cb"+i),t=document.getElementById("ct"+i);
-  if(b){b.textContent=chks[i]?"✓":"";b.className="chk-box"+(chks[i]?" done":"");}
+  if(b){b.innerHTML=chks[i]?"&#10003;":"";b.className="chk-box"+(chks[i]?" done":"");}
   if(t){t.className="chk-text"+(chks[i]?" done":"");}
 }
-
 startTs();draw();
 </script>
 </body>
