@@ -235,21 +235,12 @@ tbody tr:last-child td{border-bottom:none}
 .t-fab-dot{width:7px;height:7px;border-radius:50%;background:#c8a96e}
 
 /* ══ END SCREEN ════════════════════════════════════════════════ */
-.end-wrap{display:none;position:fixed;inset:0;background:#0e1a0f;z-index:1000;overflow-y:auto;padding:48px 28px 40px}
-.end-wrap.on{display:block}
-.end-h{font-size:26px;font-weight:300;color:#fff;text-align:center;margin-bottom:5px;letter-spacing:-.3px}
-.end-sub{font-size:13px;color:rgba(255,255,255,.38);text-align:center;margin-bottom:34px;font-weight:300}
-.end-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;max-width:840px;margin:0 auto 30px}
-.end-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:16px 18px;transition:border-color .2s,background .2s}
-.end-card:hover{background:rgba(255,255,255,.07);border-color:rgba(200,169,110,.25)}
-.end-card-n{font-size:9px;color:#c8a96e;font-family:var(--m);letter-spacing:.7px;text-transform:uppercase;margin-bottom:6px}
-.end-card-t{font-size:13px;font-weight:500;color:#fff;margin-bottom:5px}
-.end-card-d{font-size:11px;color:rgba(255,255,255,.42);line-height:1.5;font-weight:300}
-.end-cta{text-align:center;padding:20px 24px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:6px;max-width:440px;margin:0 auto 18px}
-.end-cta-l{color:rgba(255,255,255,.55);font-size:13px;font-weight:300;margin-bottom:3px}
-.end-cta-v{color:#c8a96e;font-size:15px;font-weight:500}
-.end-cta-s{color:rgba(255,255,255,.35);font-size:11px;font-weight:300;margin-top:6px}
-.end-btns{display:flex;justify-content:center;gap:10px}
+.end-wrap{display:none;position:fixed;inset:0;background:rgba(14,26,15,.88);z-index:1000;align-items:center;justify-content:center}
+.end-wrap.on{display:flex}
+.end-inner{text-align:center;padding:52px 48px;background:#162b1a;border:1px solid rgba(200,169,110,.25);border-radius:8px;max-width:380px;width:90%}
+.end-h{font-size:20px;font-weight:300;color:#fff;margin-bottom:10px;letter-spacing:-.3px}
+.end-sub{font-size:12px;color:rgba(255,255,255,.38);margin-bottom:34px;font-weight:300;line-height:1.6}
+.end-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .end-btn{padding:10px 22px;border-radius:5px;border:none;cursor:pointer;font-family:var(--f);font-size:12px;font-weight:500;transition:all .2s}
 .end-btn-p{background:#c8a96e;color:#162b1a}
 .end-btn-p:hover{background:#a88830}
@@ -295,9 +286,8 @@ tbody tr:last-child td{border-bottom:none}
   .t-bar-title{font-size:12px;white-space:normal}
   .t-bar-desc{-webkit-line-clamp:3}
   .t-fab{bottom:10px;right:10px;padding:9px 14px;font-size:11px}
-  .end-grid{grid-template-columns:1fr;max-width:100%}
-  .end-h{font-size:20px}
-  .end-wrap{padding:30px 16px}
+  .end-inner{padding:36px 24px;max-width:90%}
+  .end-h{font-size:18px}
   .end-btns{flex-direction:column}
   .end-btn{width:100%;text-align:center}
 }
@@ -1194,27 +1184,13 @@ startTs();draw();
 </button>
 
 <div class="end-wrap" id="endWrap">
-  <div class="end-h">Production Cockpit &mdash; Module 1</div>
-  <div class="end-sub">What you have just seen is the foundation. Here is what we build next.</div>
-  <div class="end-grid">
-    <div class="end-card"><div class="end-card-n">Module 2</div><div class="end-card-t">Proposal AI</div><div class="end-card-d">Engineers generate proposals in hours, not days &mdash; live ERP data flows in automatically.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 3</div><div class="end-card-t">Billing Automation</div><div class="end-card-d">Auto-pull actual hours per job and generate invoices directly. Zero manual entry.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 4</div><div class="end-card-t">CRM &amp; Follow-up AI</div><div class="end-card-d">Automated follow-up on open proposals at exactly the right moment.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 5</div><div class="end-card-t">Delivery Risk Predictor</div><div class="end-card-d">ML model predicts delivery delays 2&ndash;3 weeks out &mdash; before they become a crisis.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 6</div><div class="end-card-t">Supplier Intelligence</div><div class="end-card-d">Track lead times, flag procurement delays, and surface reorder recommendations automatically.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 7</div><div class="end-card-t">Executive Dashboard</div><div class="end-card-d">Portfolio view across all Arkad companies &mdash; revenue, capacity, delivery performance in one place.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 8</div><div class="end-card-t">Shift Planning AI</div><div class="end-card-d">Optimise staffing automatically based on live workload and the upcoming order pipeline.</div></div>
-    <div class="end-card"><div class="end-card-n">Module 9</div><div class="end-card-t">Quality Tracking</div><div class="end-card-d">Rework, defect rates and quality checkpoints per job &mdash; connected to the same ERP data.</div></div>
-    <div class="end-card"><div class="end-card-n">All 4 companies</div><div class="end-card-t">Portfolio Rollout</div><div class="end-card-d">Same architecture for food machinery and intralogistics &mdash; same ERP model, new KPI sets.</div></div>
-  </div>
-  <div class="end-cta">
-    <div class="end-cta-l">Ready to get started?</div>
-    <div class="end-cta-v">Aigency Global &nbsp;&middot;&nbsp; aigency.global</div>
-    <div class="end-cta-s">Production Cockpit &nbsp;&middot;&nbsp; PoC-first &nbsp;&middot;&nbsp; MSOFT Business5 ready</div>
-  </div>
-  <div class="end-btns">
-    <button class="end-btn end-btn-p" onclick="document.getElementById('endWrap').classList.remove('on')">Explore the dashboard</button>
-    <button class="end-btn end-btn-s" onclick="document.getElementById('endWrap').classList.remove('on');tourStart()">Restart tour</button>
+  <div class="end-inner">
+    <div class="end-h">Tour complete</div>
+    <div class="end-sub">You have seen all eight KPIs.<br>Explore the dashboard or run the tour again.</div>
+    <div class="end-btns">
+      <button class="end-btn end-btn-p" onclick="document.getElementById('endWrap').classList.remove('on')">Explore the dashboard</button>
+      <button class="end-btn end-btn-s" onclick="document.getElementById('endWrap').classList.remove('on');tourStart()">Restart tour</button>
+    </div>
   </div>
 </div>
 
